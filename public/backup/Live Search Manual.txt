@@ -1,0 +1,23 @@
+
+            $('body').on('keyup', '#cari', function() {
+                var searchQuest = $(this).val();
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route("siswa.cari") }}',
+                    dataType: 'json',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        searchQuest: searchQuest
+                    },
+                    success: function(res) {
+                        var tableData = '';
+
+                        $('#body_table').html('');
+                        $.each(res, function(index, value) {
+                            tableData = '<tr><td class="align-middle">' + value.nama + '</td><td class="align-middle">' + value.kelas + '</td><td class="align-middle">' + value.jurusan + '</td> <td class="align-middle">' + value.total_poin + '</td><td><a href = "/siswa/detail/' + value.id + '"class = "btn btn-warning my-sm-1" > Detail </a></td></tr>';
+                            $('#body_table').append(tableData);
+                        });
+                    }
+                });
+            });

@@ -1,0 +1,68 @@
+/* Universal */
+body {
+    background-color: #303e56;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Button */
+.button-main {
+    background-color: #0e5083;
+}
+
+.button-main:hover {
+    background-color: #113e61;
+}
+
+.btn,
+.form-control {
+    border-radius: 0;
+}
+
+/* Card */
+.bg_card_login {
+    background-color: #0e5083;
+    padding-top: 7%;
+}
+
+.margin-card-login {
+    margin-top: 250px;
+}
+
+.margin-card-reset_password {
+    margin-top: 170px;
+}
+
+.bg-card-header {
+    background-color: #0e5083;
+}
+
+/* Line */
+.hr-black {
+    margin: 1.5rem 3rem 1rem 3rem;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.hr-black-ubah-password {
+    margin: 1.5rem 8rem 1rem 8rem;
+    border-top: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.hr-white {
+    margin: 1.5rem 3rem 1rem 3rem;
+    border-top: 1px solid white;
+}
+
+.card-body-login {
+    padding: 0px 15px;
+}
+
+/* Screen Size */
+@media (max-width: 575px) {
+    .margin-card-login {
+        margin-top: 20px;
+    }
+    .margin-card-reset_password {
+        margin-top: 20px;
+    }
+}

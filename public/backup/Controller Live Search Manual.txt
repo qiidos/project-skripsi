@@ -1,0 +1,8 @@
+  public function cari(Request $request)
+    {
+        $request->get('searchQuest');
+
+        $siswa = Siswa::where('nama', 'like', '%' . $request->get('searchQuest') . '%')->get();
+
+        return json_encode($siswa);
+    }

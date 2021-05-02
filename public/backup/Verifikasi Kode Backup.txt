@@ -1,0 +1,32 @@
+$adm = Admin::all();
+
+        foreach ($adm as $a) {
+            $token = $a->token;
+            $dekrip_token = Crypt::decryptString($token);
+            $a->token = $dekrip_token;
+            $a->save();
+        }
+
+        $admin = Admin::where('token', $kode)->first();
+
+
+
+ $enkrip_adm = Admin::all();
+
+            foreach ($enkrip_adm as $ea) {
+                $de_token = $ea->token;
+                $enkrip_token = Crypt::encryptString($de_token);
+                $ea->token = $enkrip_token;
+                $ea->save();
+            }
+
+
+
+ $enkrip_adm = Admin::all();
+
+            foreach ($enkrip_adm as $ea) {
+                $de_token = $ea->token;
+                $enkrip_token = Crypt::encryptString($de_token);
+                $ea->token = $enkrip_token;
+                $ea->save();
+            }

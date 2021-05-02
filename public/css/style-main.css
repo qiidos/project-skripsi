@@ -1,0 +1,163 @@
+/* Universal */
+body {
+    background-color: #dadde2;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    margin: 0px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bg-navbar {
+    background-color: #303e56;
+}
+
+.card-margin {
+    margin-top: 30px;
+}
+
+.breadcrumb-margin-top {
+    margin-top: 38px;
+}
+
+.item-bread {
+    display: flex;
+}
+
+/* Button */
+.button-main {
+    background-color: #303e56;
+}
+
+.button-secondary {
+    background-color: #627aa5;
+}
+
+.button-main:hover {
+    background-color: #245174;
+}
+
+.button-secondary:hover {
+    background-color: #3c5e9c;
+}
+
+.btn-custom {
+    width: 100px;
+}
+
+.dropdown-item:active {
+    background: rgb(255, 236, 236);
+    color: #303e56;
+}
+
+.button-trans {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+#mit {
+    margin-left: 20px;
+}
+
+/* Table */
+.thead-bg {
+    background-color: #303e56;
+    color: white;
+}
+
+.tbody-bg {
+    background-color: #e6e6e6;
+}
+
+.cardbody-bg {
+    background-color: #ffffff;
+}
+
+.btn,
+.dropdown-menu,
+.form-control {
+    border-radius: 0;
+}
+
+/* Line */
+.hr-black {
+    margin: 1.5rem 1rem 1rem 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.hr-white {
+    margin: 1.5rem 3rem 1rem 3rem;
+    border-top: 1px solid white;
+}
+
+.hr-black-content {
+    margin: 1rem 1rem 1rem 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Screen */
+@media screen and (max-width: 575px) {
+    .top-margin-secondary {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .style-btn {
+        margin-left: 15%;
+        margin-right: 30%;
+    }
+
+    .style-me {
+        margin-right: 13px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hide {
+        display: none;
+    }
+
+    .button-block {
+        margin-top: 10px;
+        width: 100%;
+        display: block;
+    }
+
+    .d-flexx {
+        flex-direction: column;
+    }
+
+    #mit {
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+
+    .top-margin {
+        margin-top: -10px;
+    }
+
+    .top-margin-2 {
+        margin-top: 30px;
+    }
+
+    .top-margin-content {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .drop {
+        position: absolute;
+        transform: translate3d(-70px, 37px, 0px);
+        top: 0px;
+        left: 0px;
+        will-change: transform;
+    }
+}
