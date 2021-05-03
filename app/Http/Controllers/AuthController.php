@@ -70,9 +70,6 @@ class AuthController extends Controller
 
         if ($pengguna != null && $pengguna->status->status == "Guru") {
             if (Hash::check($password, $pengguna->password) || $pengguna->password == $password) {
-                $pengguna->update([
-                    'password' => Hash::make($password)
-                ]);
                 $request->session()->put('session', $pengguna->username);
                 $request->session()->put('nama', $pengguna->nama);
                 return redirect('/daftar_siswa');
@@ -82,9 +79,6 @@ class AuthController extends Controller
             }
         } else if ($pengguna != null && $pengguna->status->status == "Siswa") {
             if (Hash::check($password, $pengguna->password) || $pengguna->password == $password) {
-                $pengguna->update([
-                    'password' => Hash::make($password)
-                ]);
                 $siswa = $pengguna->siswa()->first();
                 $request->session()->put('session', $pengguna->username);
                 $request->session()->put('nama', $pengguna->nama);
