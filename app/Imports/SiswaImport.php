@@ -7,8 +7,9 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
-class SiswaImport implements ToModel, WithHeadingRow, WithValidation
+class SiswaImport implements ToModel, WithHeadingRow, WithValidation, WithCustomCsvSettings
 {
     use Importable;
     public function model(array $row)
@@ -36,5 +37,12 @@ class SiswaImport implements ToModel, WithHeadingRow, WithValidation
     public function chunkSize(): int
     {
         return 5000;
+    }
+
+    public function getCsvSettings(): array
+    {
+        return [
+            'delimiter' => ";"
+        ];
     }
 }

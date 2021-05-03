@@ -28,7 +28,7 @@
                             Menu <span class="sr-only">(current)</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/daftar_siswa">Siswa</a>
+                            <a class="dropdown-item" href="/daftar_siswa">Daftar Siswa</a>
                         </div>
                     </li>
                 </ul>
@@ -39,8 +39,7 @@
                         </a>
                         <div class="dropdown-menu drop" x-placement="bottom-start" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/ubah_password"><i class="fas fa-key" style="margin-right: 10px;"></i>Ubah Password</a>
-                            <a class="dropdown-item" href="/tambah_akun_siswa"><i class="fas fa-user-plus" style="margin-right: 10px;"></i>Tambah Akun Siswa</a>
-                            <a class="dropdown-item" href="/import_siswa"><i class="fas fa-user-plus" style="margin-right: 10px;"></i>Import Data Siswa</a>
+                            <a class="dropdown-item" href="/kelola_siswa"><i class="fas fa-user-plus" style="margin-right: 10px;"></i>Kelola Siswa</a>
                             <a class="dropdown-item" href="/keluar"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>Keluar</a>
                         </div>
                     </li>

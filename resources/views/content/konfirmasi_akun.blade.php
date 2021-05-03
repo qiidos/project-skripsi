@@ -4,6 +4,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-navbar rounded-0 breadcrumb-margin-top p-md-3">
         <div class="container item-bread">
+            <li class="breadcrumb-item"><a href="/kelola_siswa" style="color: #6da0d3; text-decoration: none;">Kelola Siswa</a></li>
             <li class="breadcrumb-item"><a href="/tambah_akun_siswa" style="color: #6da0d3; text-decoration: none;">Tambah Akun Siswa</a></li>
             <li class="breadcrumb-item active text-light" aria-current="page">Konfirmasi Tambah Akun</li>
         </div>

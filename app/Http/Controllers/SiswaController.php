@@ -208,6 +208,15 @@ class SiswaController extends Controller
         }
     }
 
+    public function kelola_siswa(Request $request)
+    {
+        if ($request->session()->has('session')) {
+            return view('/content/kelola_siswa');
+        } else {
+            return redirect('/masuk');
+        }
+    }
+
     public function import_siswa(Request $request)
     {
         if ($request->session()->has('session')) {
@@ -219,23 +228,40 @@ class SiswaController extends Controller
 
     public function prosesImportSiswa(Request $request)
     {
-        $catchSiswa = (Excel::toArray(new SiswaImport, $request->file('data_siswa')));
+        try {
+            $catchSiswa = (Excel::toArray(new SiswaImport, $request->file('data_siswa')));
+            $nis = [];
+            $collapse = \Illuminate\Support\Arr::collapse($catchSiswa);
+            foreach ($collapse as $c) {
+                $nis[] = $c['nis'];
+            };
 
-        $nis = [];
-        $collapse = \Illuminate\Support\Arr::collapse($catchSiswa);
-        foreach ($collapse as $c) {
-            $nis[] = $c['nis'];
-        };
+            $siswa = Siswa::whereIn('nis', $nis)->get();
 
-        $siswa = Siswa::whereIn('nis', $nis)->get();
+            if (count($siswa)) {
+                $request->session()->flash('siswa_dup', 'Tambah data gagal, terdapat data yang sama dengan data siswa sebanyak ' . count($siswa) . ' siswa!');
+                return view('/auth/import_data_siswa', ['siswa' => $siswa]);
+            };
 
-        if (count($siswa)) {
-            $request->session()->flash('siswa_dup', 'Tambah data gagal, terdapat data yang sama dengan data siswa sebanyak ' . count($siswa) . ' siswa!');
-            return view('/auth/import_data_siswa', compact('siswa'));
-        };
-
-        Excel::import(new SiswaImport, $request->file('data_siswa'));
-        $request->session()->flash('data_siswa_sukses', 'Tambah data siswa berhasil!');
-        return redirect('/import_siswa');
+            try {
+                Excel::import(new SiswaImport, $request->file('data_siswa'));
+                $request->session()->flash('data_siswa_sukses', 'Berhasil menambahkan data siswa sebanyak ' . count($nis) . ' siswa.');
+                return redirect('/daftar_siswa');
+            } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                $failures = $e->failures();
+                $fail = [];
+                foreach ($failures as $failure) {
+                    $row = $failure->row();
+                    $col = $failure->attribute();
+                    $fail[] = '[baris:' . $row . ', kolom:' . $col . ']';
+                }
+                $error = join(", ", $fail);
+                $request->session()->flash('tipe_salah', 'Terdapat tipe data yang salah!');
+                return view('/auth/import_data_siswa', compact('error'));
+            }
+        } catch (\Throwable $th) {
+            $request->session()->flash('format_gagal', 'File harus berformat CSV.');
+            return redirect('/import_siswa');
+        }
     }
 }

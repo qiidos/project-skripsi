@@ -45,6 +45,7 @@ Route::post('/siswa/detail/proses_tambah/{id}', 'PoinController@prosesTambahPoin
 Route::get('/siswa/detail/edit_poin/{id}', 'PoinController@edit_poin');
 Route::post('/siswa/detail/proses_edit/{id}', 'PoinController@prosesEditPoin');
 Route::get('/siswa/detail/hapus_poin/{id}', 'PoinController@prosesHapusPoin');
+Route::get('/kelola_siswa', 'SiswaController@kelola_siswa');
 Route::get('/tambah_akun_siswa', 'SiswaController@tambah_akun');
 Route::post('/tambah_akun_siswa/proses_tambah_akun', 'SiswaController@prosesTambahAkun');
 Route::post('/tambah_akun_siswa/proses_konfirmasi_akun', 'SiswaController@prosesKonfirmasiAkun');
