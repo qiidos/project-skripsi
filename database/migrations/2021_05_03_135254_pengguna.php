@@ -16,10 +16,10 @@ class Pengguna extends Migration
         Schema::create('penggunas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('status_id');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('nama');
             $table->text('password');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->text('token');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

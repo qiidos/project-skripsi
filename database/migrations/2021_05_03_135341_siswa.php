@@ -17,7 +17,7 @@ class Siswa extends Migration
             $table->increments('id');
             $table->unsignedInteger('kelas_id');
             $table->unsignedInteger('nilai_id');
-            $table->string('nis');
+            $table->string('nis')->unique();
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->timestamp('created_at')->useCurrent();
