@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Poin;
 use App\Siswa;
+use App\Kategori;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
@@ -14,7 +15,8 @@ class PoinController extends Controller
     {
         if ($request->session()->has('session')) {
             $siswa = Siswa::where('id', $id)->first();
-            return view('/content/tambah_poin', ['siswa' => $siswa]);
+            $kategori = Kategori::get();
+            return view('/content/tambah_poin', compact('siswa', 'kategori'));
         } else {
             return redirect('/masuk');
         }
@@ -45,8 +47,8 @@ class PoinController extends Controller
 
         Poin::create([
             'siswa_id' => $id,
+            'kategori_id' => $request->kategori,
             'jenis_pelanggaran' => $request->pelanggaran,
-            'kategori' => $request->kategori,
             'poin' => $request->jumlah_poin,
             'tanggal' => Carbon::parse($request->tanggal)
         ]);
@@ -59,8 +61,9 @@ class PoinController extends Controller
     {
         if ($request->session()->has('session')) {
             $poin = Poin::find($id);
+            $kategori = Kategori::get();
             $tanggal = Carbon::parse($poin->tanggal)->format('d-m-Y');
-            return view('/content/edit_poin', compact('poin', 'tanggal'));
+            return view('/content/edit_poin', compact('poin', 'tanggal', 'kategori'));
         } else {
             return redirect('/masuk');
         }
@@ -91,14 +94,14 @@ class PoinController extends Controller
 
         $poin = Poin::find($id);
 
-        if ($poin->jenis_pelanggaran == $request->pelanggaran_edit && $poin->kategori == $request->kategori_edit && $poin->poin == $request->jumlah_poin_edit && Carbon::parse($poin->tanggal)->format('d-m-Y') == Carbon::parse($request->tanggal_edit)->format('d-m-Y')) {
+        if ($poin->jenis_pelanggaran == $request->pelanggaran_edit && $poin->kategori_id == $request->kategori_edit && $poin->poin == $request->jumlah_poin_edit && Carbon::parse($poin->tanggal)->format('d-m-Y') == Carbon::parse($request->tanggal_edit)->format('d-m-Y')) {
             $request->session()->flash('edit_poin_tetap', 'Tidak ada data yang diubah!');
         } else {
             $request->session()->flash('edit_poin', 'Berhasil mempertbarui data poin pelanggaran!');
         }
 
         $poin->jenis_pelanggaran = $request->pelanggaran_edit;
-        $poin->kategori = $request->kategori_edit;
+        $poin->kategori_id = $request->kategori_edit;
         $poin->poin = $request->jumlah_poin_edit;
         $poin->tanggal = Carbon::parse($request->tanggal_edit);
         $poin->save();
@@ -121,8 +124,8 @@ class PoinController extends Controller
     public function prosesCetakPoin($id)
     {
         $siswa = Siswa::where('id', $id)->first();
-        $poin = $siswa->poin()->select('id', 'siswa_id', 'kategori', 'jenis_pelanggaran', 'poin', 'created_at')
-            ->orderBy('created_at', 'desc')
+        $poin = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
+            ->orderBy('tanggal', 'desc')
             ->get();
         $pdf = PDF::loadview('/print/siswa_pdf', compact('siswa', 'poin'))->setPaper('a4', 'potrait');
         return $pdf->stream("Poin Pelanggaran-" . $siswa->nama . "-" . $siswa->kelas . "-" . $siswa->jurusan . ".pdf");

@@ -7,6 +7,7 @@ use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use App\Siswa;
 use App\Pengguna;
+use App\Kategori;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
@@ -55,6 +56,7 @@ class SiswaController extends Controller
 
             $siswa = Siswa::where('id', $id)->first();
             $total_poin = $siswa->poin()->sum('poin');
+            $kategori = Kategori::get();
 
             if ($total_poin == 0) {
                 $siswa->update([
@@ -78,7 +80,7 @@ class SiswaController extends Controller
                 ]);
             }
 
-            return view('/content/detail_siswa', compact('siswa'));
+            return view('/content/detail_siswa', compact('siswa', 'kategori'));
         } else {
             return redirect('/masuk');
         }
@@ -89,18 +91,22 @@ class SiswaController extends Controller
         $siswa = Siswa::where('id', $request->id)->first();
         if ($request->ajax()) {
             if (!empty($request->kategori)) {
-                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori', 'jenis_pelanggaran', 'poin', 'created_at')
-                    ->where('kategori', $request->kategori)
-                    ->orderBy('created_at', 'desc')
+                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
+                    ->where('kategori_id', $request->kategori)
+                    ->orderBy('tanggal', 'desc')
                     ->get();
             } else {
-                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori', 'jenis_pelanggaran', 'poin', 'created_at')
-                    ->orderBy('created_at', 'desc')
+                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
+                    ->orderBy('tanggal', 'desc')
                     ->get();
             }
             return DataTables::of($data)
-                ->editColumn('created_at', function ($data) {
+                ->editColumn('tanggal', function ($data) {
                     return Carbon::parse($data->tanggal)->format('d M Y');
+                })
+                ->editColumn('kategori', function ($data) {
+                    $kategori = $data->kategori->kategori;
+                    return $kategori;
                 })
                 ->make(true);
         }
@@ -137,6 +143,16 @@ class SiswaController extends Controller
         }
         $request->session()->flash('motivasi_simpan', 'Berhasil menyimpan motivasi dan penguatan!');
         return redirect('/siswa/detail/' . $id);
+    }
+
+
+    public function kelola_siswa(Request $request)
+    {
+        if ($request->session()->has('session')) {
+            return view('/content/kelola_siswa');
+        } else {
+            return redirect('/masuk');
+        }
     }
 
     public function tambah_akun(Request $request)
@@ -196,6 +212,7 @@ class SiswaController extends Controller
         if (empty($pengguna)) {
             Pengguna::create([
                 'username' => $request->nis,
+                'status_id' => 2,
                 'nama' => $request->nama,
                 'password' => Hash::make($request->password),
                 'email' => $request->email
@@ -208,19 +225,10 @@ class SiswaController extends Controller
         }
     }
 
-    public function kelola_siswa(Request $request)
-    {
-        if ($request->session()->has('session')) {
-            return view('/content/kelola_siswa');
-        } else {
-            return redirect('/masuk');
-        }
-    }
-
     public function import_siswa(Request $request)
     {
         if ($request->session()->has('session')) {
-            return view('/auth/import_data_siswa');
+            return view('/content/import_data_siswa');
         } else {
             return redirect('/masuk');
         }
@@ -240,7 +248,7 @@ class SiswaController extends Controller
 
             if (count($siswa)) {
                 $request->session()->flash('siswa_dup', 'Tambah data gagal, terdapat data yang sama dengan data siswa sebanyak ' . count($siswa) . ' siswa!');
-                return view('/auth/import_data_siswa', ['siswa' => $siswa]);
+                return view('/content/import_data_siswa', compact('siswa'));
             };
 
             try {
@@ -257,10 +265,10 @@ class SiswaController extends Controller
                 }
                 $error = join(", ", $fail);
                 $request->session()->flash('tipe_salah', 'Terdapat tipe data yang salah!');
-                return view('/auth/import_data_siswa', compact('error'));
+                return view('/content/import_data_siswa', compact('error'));
             }
         } catch (\Throwable $th) {
-            $request->session()->flash('format_gagal', 'File harus berformat CSV.');
+            $request->session()->flash('format_gagal', 'File harus diisi dan harus sesuai format yang telah disediakan!');
             return redirect('/import_siswa');
         }
     }

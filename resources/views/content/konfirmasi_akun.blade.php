@@ -73,11 +73,6 @@
                                                             <td>{{ $siswa->nama }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><strong>Jenis Kelamin</strong></td>
-                                                            <td><strong>:</strong></td>
-                                                            <td>{{ $siswa->jenis_kelamin }}</td>
-                                                        </tr>
-                                                        <tr>
                                                             <td><strong>Kelas</strong></td>
                                                             <td><strong>:</strong></td>
                                                             <td>{{ $siswa->kelas }} {{ $siswa->jurusan }}</td>

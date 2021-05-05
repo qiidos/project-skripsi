@@ -37,10 +37,24 @@
                             <form action="/import_siswa/proses_import" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-row justify-content-center">
+                                    <div class="form-group col-md-12 text-center">
+                                        <div>
+                                            <a href="{{url('/csv/siswa_siswa.csv')}}" download="Template Import Data Siswa SiTalang.csv" class="btn btn-success text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Template Format CSV</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row justify-content-center">
+                                    <div class="form-group col-md-7 text-center">
+                                        <div>
+                                            <small class="form-text text-muted"><strong>Informasi: </strong>Download format file CSV pada tombol yang tersedia dan isikan data siswa yang akan dimasukkan ke dalam sistem pada format tersebut.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row justify-content-center mt-md-3">
                                     <div class="form-group col-md-12">
                                         <div class="d-flexx d-flex justify-content-center pb-sm-1">
                                             <div>
-                                                <a href="{{url('/csv/data_siswa.csv')}}" download="template.csv" class="btn btn-success text-light button-block" type="button">Download Format CSV.</a>
+                                                <a href="/kelola_siswa" class="btn btn-custom btn-secondary text-light button-block" id="kembali" type="button">Kembali</a>
                                             </div>
                                             <div>
                                                 <button type="button" class="btn btn-custom btn-primary text-light button-block" id="mit" data-toggle="modal" data-target="#myModal">Import</button>
@@ -55,6 +69,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <input type="file" name="data_siswa"></input>
+                                                                <small class="form-text text-muted"><strong>CATATAN: </strong>Dengan menekan tombol import berarti anda sudah yakin untuk memasukkan data siswa! (Anda tidak dapat membatalkan tindakan ini).</small>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,9 +78,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <a href="/kelola_siswa" method="post" class="btn btn-custom btn-secondary text-light button-block" id="mit" type="button">Kembali</a>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +132,7 @@
                                     <strong>{{ $message }}</strong>
                                 </div>
                                 <div class="form-row justify-content-center mx-1">
-                                    <p>Terdapat kesalahan pada {{ $error }}</p>
+                                    <p>Terdapat kesalahan tipe data pada {{ $error }}</p>
                                 </div>
                                 @endif
                             </form>

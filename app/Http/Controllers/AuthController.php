@@ -230,7 +230,7 @@ class AuthController extends Controller
         ];
 
         $this->validate($request, [
-            'password_baru' => 'required|required_with:konfirmasi_password|min:6|regex:/^[a-z\.]+[0-9\d\.]+$/|alpha_num',
+            'password_baru' => 'required|required_with:konfirmasi_password|min:6|regex:/^[A-Za-z\.]+[0-9\d\.]+$/|alpha_num',
             'konfirmasi_password' => 'required|same:password_baru'
         ], $messages);
 

@@ -177,11 +177,6 @@
                     <td>{{ $siswa->nama }}</td>
                 </tr>
                 <tr>
-                    <td><strong>Jenis Kelamin</strong></td>
-                    <td><strong>:</strong></td>
-                    <td>{{ $siswa->jenis_kelamin }}</td>
-                </tr>
-                <tr>
                     <td><strong>Kelas</strong></td>
                     <td><strong>:</strong></td>
                     <td>{{ $siswa->kelas }} {{ $siswa->jurusan }}</td>
@@ -215,12 +210,12 @@
                 <tr>
                     <td></td>
                     <td>
-                        {{ date('d-m-Y', strtotime($poin->created_at)) }}
+                        {{ date('d-m-Y', strtotime($poin -> tanggal)) }}
                     </td>
                     <td>
                         {{ $poin -> jenis_pelanggaran }}
                     </td>
-                    <td>{{ $poin -> kategori }}</td>
+                    <td>{{ $poin -> kategori -> kategori }}</td>
                     <td>
                         {{ $poin -> poin }}
                     </td>

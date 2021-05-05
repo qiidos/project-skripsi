@@ -44,9 +44,9 @@
                                 <label for="kategori"><strong>Kategori</strong></label>
                                 <select id="kategori" name="kategori" class="form-control" required>
                                     <option disabled selected>Pilih Kategori</option>
-                                    <option>Ringan</option>
-                                    <option>Sedang</option>
-                                    <option>Berat</option>
+                                    @foreach($kategori as $k)
+                                    <option value="{{ $k->id }}">{{ $k->kategori }}</option>
+                                    @endforeach
                                 </select>
                                 @if($errors->has('kategori'))
                                 <div class="text-danger">

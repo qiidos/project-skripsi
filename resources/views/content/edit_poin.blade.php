@@ -43,19 +43,9 @@
                             <div class="form-group col-md-7">
                                 <label for="kategori_edit"><strong>Kategori</strong></label>
                                 <select id="kategori_edit" name="kategori_edit" class="form-control" required>
-                                    @if($poin->kategori == 'Ringan')
-                                    <option selected>Ringan</option>
-                                    <option>Sedang</option>
-                                    <option>Berat</option>
-                                    @elseif($poin->kategori == 'Sedang')
-                                    <option>Ringan</option>
-                                    <option selected>Sedang</option>
-                                    <option>Berat</option>
-                                    @elseif($poin->kategori == 'Berat')
-                                    <option>Ringan</option>
-                                    <option>Sedang</option>
-                                    <option selected>Berat</option>
-                                    @endif
+                                    @foreach($kategori as $k)
+                                    <option value="{{ $k->id }}" {{ $k->id == $poin->kategori_id ? 'selected' : '' }}>{{ $k->kategori }}</option>
+                                    @endforeach
                                 </select>
                                 @if($errors->has('kategori_edit'))
                                 <div class="text-danger">
