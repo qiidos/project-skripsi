@@ -128,6 +128,6 @@ class PoinController extends Controller
             ->orderBy('tanggal', 'desc')
             ->get();
         $pdf = PDF::loadview('/print/siswa_pdf', compact('siswa', 'poin'))->setPaper('a4', 'potrait');
-        return $pdf->stream("Poin Pelanggaran-" . $siswa->nama . "-" . $siswa->kelas . "-" . $siswa->jurusan . ".pdf");
+        return $pdf->stream("Poin Pelanggaran-" . $siswa->nama . "-" . $siswa->kelas->kelas . "-" . $siswa->jurusan->jurusan . ".pdf");
     }
 }

@@ -22,7 +22,7 @@
                             <select id="kelas" name="kelas" class="form-control filter-select">
                                 <option value="0">Pilih Kelas</option>
                                 @foreach($kelas as $k)
-                                <option value="{{ $k->kelas }}">{{ $k->kelas }}</option>
+                                <option value="{{ $k->id }}">{{ $k->kelas }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -31,7 +31,7 @@
                             <select id="jurusan" name="jurusan" class="form-control filter-select">
                                 <option value="0">Pilih Jurusan</option>
                                 @foreach($jurusan as $j)
-                                <option value="{{ $j->jurusan }}">{{ $j->jurusan }}</option>
+                                <option value="{{ $j->id }}">{{ $j->jurusan }}</option>
                                 @endforeach
                             </select>
                         </div>

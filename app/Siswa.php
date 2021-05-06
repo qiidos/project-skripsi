@@ -29,4 +29,14 @@ class Siswa extends Model
     {
         return $this->hasOne('App\Motivasi', 'siswa_id', 'id');
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo('App\Kelas', 'kelas_id', 'id');
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo('App\Jurusan', 'jurusan_id', 'id');
+    }
 }

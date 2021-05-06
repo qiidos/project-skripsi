@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Siswa;
 use App\Pengguna;
 use App\Kategori;
+use App\Kelas;
+use App\Jurusan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
@@ -19,14 +21,14 @@ class SiswaController extends Controller
         if ($request->session()->has('session')) {
             if ($request->ajax()) {
                 if (!empty($request->jurusan) && !empty($request->kelas)) {
-                    $data = Siswa::select('id', 'nama', 'kelas', 'jurusan')
-                        ->where('jurusan', $request->jurusan)->where('kelas', $request->kelas)->orderBy('kelas', 'asc')->get();
+                    $data = Siswa::select('id', 'nama', 'kelas_id', 'jurusan_id')
+                        ->where('jurusan_id', $request->jurusan)->where('kelas_id', $request->kelas)->orderBy('kelas_id', 'asc')->get();
                 } else if (!empty($request->kelas) && empty($request->jurusan)) {
-                    $data = Siswa::select('id', 'nama', 'kelas', 'jurusan')->where('kelas', $request->kelas)->orderBy('jurusan', 'asc')->get();
+                    $data = Siswa::select('id', 'nama', 'kelas_id', 'jurusan_id')->where('kelas_id', $request->kelas)->orderBy('jurusan_id', 'asc')->get();
                 } else if (empty($request->kelas) && !empty($request->jurusan)) {
-                    $data = Siswa::select('id', 'nama', 'kelas', 'jurusan')->where('jurusan', $request->jurusan)->orderBy('kelas', 'asc')->get();
+                    $data = Siswa::select('id', 'nama', 'kelas_id', 'jurusan_id')->where('jurusan_id', $request->jurusan)->orderBy('kelas_id', 'asc')->get();
                 } else {
-                    $data = Siswa::orderBy('kelas', 'asc')->get();
+                    $data = Siswa::orderBy('kelas_id', 'asc')->get();
                 }
                 return DataTables::of($data)
                     ->addIndexColumn()
@@ -35,15 +37,23 @@ class SiswaController extends Controller
                         return $btn;
                     })
                     ->rawColumns(['opsi'])
+                    ->editColumn('kelas', function ($data) {
+                        $kelas = $data->kelas->kelas;
+                        return $kelas;
+                    })
+                    ->editColumn('jurusan', function ($data) {
+                        $jurusan = $data->jurusan->jurusan;
+                        return $jurusan;
+                    })
                     ->editColumn('total_poin', function ($data) {
                         $total_poin = $data->poin()->sum('poin');
                         return $total_poin;
                     })
                     ->make(true);
             }
-            $siswa = Siswa::orderBy('kelas', 'asc')->get();
-            $kelas = Siswa::select('kelas')->groupBy('kelas')->orderBy('kelas', 'asc')->get();
-            $jurusan = Siswa::select('jurusan')->groupBy('jurusan')->orderBy('jurusan', 'asc')->get();
+            $siswa = Siswa::get();
+            $kelas = Kelas::get();
+            $jurusan = Jurusan::get();
             return view('/content/daftar_siswa', compact('siswa', 'jurusan', 'kelas'));
         } else {
             return redirect('/masuk');

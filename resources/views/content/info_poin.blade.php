@@ -37,7 +37,7 @@
                                             <tr>
                                                 <td><strong>Kelas</strong></td>
                                                 <td><strong>:</strong></td>
-                                                <td>{{ $siswa->kelas }} {{ $siswa->jurusan }}</td>
+                                                <td>{{ $siswa->kelas->kelas }} {{ $siswa->jurusan->jurusan }}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Predikat Tingkah Laku</strong></td>

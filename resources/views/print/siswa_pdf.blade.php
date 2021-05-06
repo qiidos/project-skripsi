@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/dompdf.css">
-    <title>Poin Pelanggaran {{ $siswa->nama }}-{{ $siswa->kelas }}-{{ $siswa->jurusan }}</title>
+    <title>Poin Pelanggaran {{ $siswa->nama }}-{{ $siswa->kelas->kelas }}-{{ $siswa->jurusan->jurusan }}</title>
     <style>
         body {
             margin: 0;
@@ -179,7 +179,7 @@
                 <tr>
                     <td><strong>Kelas</strong></td>
                     <td><strong>:</strong></td>
-                    <td>{{ $siswa->kelas }} {{ $siswa->jurusan }}</td>
+                    <td>{{ $siswa->kelas->kelas }} {{ $siswa->jurusan->jurusan }}</td>
                 </tr>
                 <tr>
                     <td><strong>Predikat Tingkah Laku</strong></td>

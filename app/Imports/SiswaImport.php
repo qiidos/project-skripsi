@@ -27,7 +27,7 @@ class SiswaImport implements ToModel, WithHeadingRow, WithValidation, WithCustom
         return [
             'nis' => 'required|numeric',
             'nama' => 'required|string|regex:/^[a-zA-Z_,.\s]+$/',
-            'jurusan' => 'required|string|regex:/^[a-zA-Z\.]+[0-9\d\.]+$/',
+            'jurusan' => 'required|numeric',
             'kelas' => 'required|numeric'
         ];
     }
