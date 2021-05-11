@@ -10,6 +10,6 @@ class Status extends Model
 
     public function pengguna()
     {
-        return $this->belongsTo('App\Pengguna');
+        return $this->hasMany('App\Pengguna');
     }
 }

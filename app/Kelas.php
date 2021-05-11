@@ -12,4 +12,9 @@ class Kelas extends Model
     {
         return $this->hasMany('App\Siswa');
     }
+
+    public function kelasGrup()
+    {
+        return $this->belongsTo('App\KelasGrup', 'kelas_grup_id');
+    }
 }

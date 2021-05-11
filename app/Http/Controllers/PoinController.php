@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Poin;
-use App\Siswa;
-use App\Kategori;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
@@ -14,8 +12,8 @@ class PoinController extends Controller
     public function tambah_poin(Request $request, $id)
     {
         if ($request->session()->has('session')) {
-            $siswa = Siswa::where('id', $id)->first();
-            $kategori = Kategori::get();
+            $siswa = getDataSiswa($id);
+            $kategori = getKategori();
             return view('/content/tambah_poin', compact('siswa', 'kategori'));
         } else {
             return redirect('/masuk');
@@ -61,7 +59,7 @@ class PoinController extends Controller
     {
         if ($request->session()->has('session')) {
             $poin = Poin::find($id);
-            $kategori = Kategori::get();
+            $kategori = getKategori();
             $tanggal = Carbon::parse($poin->tanggal)->format('d-m-Y');
             return view('/content/edit_poin', compact('poin', 'tanggal', 'kategori'));
         } else {
@@ -123,11 +121,11 @@ class PoinController extends Controller
 
     public function prosesCetakPoin($id)
     {
-        $siswa = Siswa::where('id', $id)->first();
+        $siswa = getDataSiswa($id);
         $poin = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
             ->orderBy('tanggal', 'desc')
             ->get();
         $pdf = PDF::loadview('/print/siswa_pdf', compact('siswa', 'poin'))->setPaper('a4', 'potrait');
-        return $pdf->stream("Poin Pelanggaran-" . $siswa->nama . "-" . $siswa->kelas->kelas . "-" . $siswa->jurusan->jurusan . ".pdf");
+        return $pdf->stream("Poin Pelanggaran - " . $siswa->nama . " - " . getKelasNameByKelasId($siswa->kelas_id) . ".pdf");
     }
 }

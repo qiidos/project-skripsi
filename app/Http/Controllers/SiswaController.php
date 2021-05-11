@@ -6,27 +6,23 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use App\Siswa;
-use App\Pengguna;
-use App\Kategori;
-use App\Kelas;
-use App\Jurusan;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
 
 class SiswaController extends Controller
 {
+    public function getKelasByTingkat($tingkat)
+    {
+        return getKelasByTingkat($tingkat);
+    }
+
     public function prosesLihatDaftarSiswa(Request $request)
     {
         if ($request->session()->has('session')) {
             if ($request->ajax()) {
-                if (!empty($request->jurusan) && !empty($request->kelas)) {
-                    $data = Siswa::select('id', 'nama', 'kelas_id', 'jurusan_id')
-                        ->where('jurusan_id', $request->jurusan)->where('kelas_id', $request->kelas)->orderBy('kelas_id', 'asc')->get();
-                } else if (!empty($request->kelas) && empty($request->jurusan)) {
-                    $data = Siswa::select('id', 'nama', 'kelas_id', 'jurusan_id')->where('kelas_id', $request->kelas)->orderBy('jurusan_id', 'asc')->get();
-                } else if (empty($request->kelas) && !empty($request->jurusan)) {
-                    $data = Siswa::select('id', 'nama', 'kelas_id', 'jurusan_id')->where('jurusan_id', $request->jurusan)->orderBy('kelas_id', 'asc')->get();
+                if (!empty($request->kelas)) {
+                    $data = Siswa::select('id', 'kelas_id', 'nis', 'nama')
+                        ->where('kelas_id', $request->kelas)->orderBy('kelas_id', 'asc')->get();
                 } else {
                     $data = Siswa::orderBy('kelas_id', 'asc')->get();
                 }
@@ -38,12 +34,7 @@ class SiswaController extends Controller
                     })
                     ->rawColumns(['opsi'])
                     ->editColumn('kelas', function ($data) {
-                        $kelas = $data->kelas->kelas;
-                        return $kelas;
-                    })
-                    ->editColumn('jurusan', function ($data) {
-                        $jurusan = $data->jurusan->jurusan;
-                        return $jurusan;
+                        return getKelasNameByKelasId($data->kelas_id);
                     })
                     ->editColumn('total_poin', function ($data) {
                         $total_poin = $data->poin()->sum('poin');
@@ -52,9 +43,7 @@ class SiswaController extends Controller
                     ->make(true);
             }
             $siswa = Siswa::get();
-            $kelas = Kelas::get();
-            $jurusan = Jurusan::get();
-            return view('/content/daftar_siswa', compact('siswa', 'jurusan', 'kelas'));
+            return view('/content/daftar_siswa', compact('siswa'));
         } else {
             return redirect('/masuk');
         }
@@ -66,7 +55,7 @@ class SiswaController extends Controller
 
             $siswa = Siswa::where('id', $id)->first();
             $total_poin = $siswa->poin()->sum('poin');
-            $kategori = Kategori::get();
+            $kategori = getKategori();
 
             if ($total_poin == 0) {
                 $siswa->update([
@@ -126,7 +115,8 @@ class SiswaController extends Controller
     {
         if ($request->session()->has('session')) {
             $siswa = Siswa::where('id', $id)->first();
-            return view('/content/info_poin', compact('siswa'));
+            $kategori = getKategori();
+            return view('/content/info_poin', compact('siswa', 'kategori'));
         }
     }
 
@@ -162,76 +152,6 @@ class SiswaController extends Controller
             return view('/content/kelola_siswa');
         } else {
             return redirect('/masuk');
-        }
-    }
-
-    public function tambah_akun(Request $request)
-    {
-        if ($request->session()->has('session')) {
-            return view('/content/tambah_akun_siswa');
-        } else {
-            return redirect('/masuk');
-        }
-    }
-
-    public function prosesTambahAkun(Request $request)
-    {
-        if ($request->session()->has('session')) {
-            $messages = [
-                'required' => 'Silahkan :attribute diisi terlebih dahulu!',
-                'min' => ':attribute minimal harus mempunyai :min karakter!',
-                'regex' => ':attribute harus terdiri dari huruf dan diakhiri dengan angka serta tanpa spasi',
-                'same' => 'Konfirmasi password harus sesuai dengan password baru!',
-                'alpha_num' => ':attribute tidak boleh menggunakan spesial karakter (titik, @, #, dsb)',
-                'email' => 'Format pengisian :attribute harus sesuai dengan format email (@ dan .)'
-            ];
-
-            $this->validate($request, [
-                'nis' => 'required',
-                'email' => 'required|email',
-                'password_baru' => 'required|required_with:konfirmasi_password|min:6|regex:/^[A-Za-z\.]+[0-9\d\.]+$/|alpha_num',
-                'konfirmasi_password' => 'required|same:password_baru'
-            ], $messages);
-
-            $mail = $request->email;
-            $pw = $request->password_baru;
-            $siswa = Siswa::where('nis', $request->nis)->first();
-            $username = Pengguna::where('username', $request->nis)->first();
-            $email = Pengguna::select('email')->where('email', $mail)->first();
-
-            if ($siswa != null && $username == null) {
-                if ($email == null) {
-                    return view('/content/konfirmasi_akun', compact('siswa', 'mail', 'pw'));
-                } else {
-                    $request->session()->flash('email_ada', 'Email telah terdaftar, silahkan hubungi pihak guru!');
-                    return redirect('/tambah_akun_siswa');
-                }
-            } else {
-                $request->session()->flash('nis_salah', 'NIS salah atau sudah terdaftar!');
-                return redirect('/tambah_akun_siswa');
-            }
-        } else {
-            return redirect('/masuk');
-        }
-    }
-
-    public function prosesKonfirmasiAkun(Request $request)
-    {
-        $pengguna = Pengguna::where('username', $request->nis)->first();
-
-        if (empty($pengguna)) {
-            Pengguna::create([
-                'username' => $request->nis,
-                'status_id' => 2,
-                'nama' => $request->nama,
-                'password' => Hash::make($request->password),
-                'email' => $request->email
-            ]);
-            $request->session()->flash('tambah_akun_berhasil', 'Berhasil menambahkan akun siswa.');
-            return redirect('/tambah_akun_siswa');
-        } else {
-            $request->session()->flash('akun_ada', 'Tambah akun gagal. Akun kemungkinan sudah terdaftar, silahkan hubungi guru!');
-            return redirect('/tambah_akun_siswa');
         }
     }
 
@@ -272,13 +192,13 @@ class SiswaController extends Controller
                     $row = $failure->row();
                     $col = $failure->attribute();
                     $fail[] = '[baris:' . $row . ', kolom:' . $col . ']';
-                }
+                };
                 $error = join(", ", $fail);
                 $request->session()->flash('tipe_salah', 'Terdapat tipe data yang salah!');
                 return view('/content/import_data_siswa', compact('error'));
             }
         } catch (\Throwable $th) {
-            $request->session()->flash('format_gagal', 'File harus diisi dan harus sesuai format yang telah disediakan!');
+            $request->session()->flash('format_gagal', 'File harus diisi dan gunakan format yang telah disediakan!');
             return redirect('/import_siswa');
         }
     }

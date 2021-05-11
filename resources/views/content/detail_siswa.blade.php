@@ -47,7 +47,7 @@
                                             <tr>
                                                 <td><strong>Kelas</strong></td>
                                                 <td><strong>:</strong></td>
-                                                <td>{{ $siswa->kelas->kelas }} {{ $siswa->jurusan->jurusan }}</td>
+                                                <td>{{ getKelasNameByKelasId($siswa->kelas_id) }}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Predikat Tingkah Laku</strong></td>

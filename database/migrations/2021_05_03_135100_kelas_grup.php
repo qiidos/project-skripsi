@@ -16,8 +16,9 @@ class KelasGrup extends Migration
         Schema::create('kelas_grups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tingkat');
-            $table->string('jurusan_grup');
-            $table->string('status');
+            $table->string('jurusan');
+            // $table->string('islulus');
+            // $table->string('angkatan');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

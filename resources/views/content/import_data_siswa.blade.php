@@ -9,6 +9,7 @@
         </div>
     </ol>
 </nav>
+
 <div class="container mt-sm-2 card-margin">
     <div class="row justify-content-center">
         <div class="col-md-12 top-margin">
@@ -38,15 +39,23 @@
                                 {{ csrf_field() }}
                                 <div class="form-row justify-content-center">
                                     <div class="form-group col-md-12 text-center">
-                                        <div>
-                                            <a href="{{url('/csv/siswa_siswa.csv')}}" download="Template Import Data Siswa SiTalang.csv" class="btn btn-success text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Template Format CSV</a>
+                                        <div class="d-flexx d-flex justify-content-center pb-sm-1">
+                                            <div>
+                                                <a href="{{url('/csv/siswa_siswa.csv')}}" download="Template Import Data Siswa SiTalang.csv" class="btn btn-success text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Template Format CSV</a>
+                                            </div>
+                                            <div>
+                                                <a href="{{url('/csv/kelas.txt')}}" download="Keterangan Kelas ID" id="mit" class="btn thead-bg text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Keterangan Kelas ID</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row justify-content-center">
                                     <div class="form-group col-md-7 text-center">
                                         <div>
-                                            <small class="form-text text-muted"><strong>Informasi: </strong>Download format file CSV pada tombol yang tersedia dan isikan data siswa yang akan dimasukkan ke dalam sistem pada format tersebut.</small>
+                                            <small class="form-text text-muted">
+                                                <strong>Informasi: </strong>Download format file CSV pada tombol yang tersedia dan isikan data siswa yang akan dimasukkan ke dalam sistem pada format tersebut.
+                                                <br>Untuk melihat daftar kelas dari masing-masing Kelas ID, silahkan download file keterangan Kelas ID.
+                                            </small>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +112,7 @@
                                                 <col span="1" style="width: 50%;">
                                                 <col span="1" style="width: 30%;">
                                             </colgroup>
-                                            <thead>
+                                            <thead class="thead-bg">
                                                 <tr class="text-center">
                                                     <th>NIS</th>
                                                     <th>Nama</th>
@@ -115,7 +124,7 @@
                                                 <tr class="text-center">
                                                     <td>{{ $s->nis }}</td>
                                                     <td>{{ $s->nama }}</td>
-                                                    <td>{{ $s->kelas }} {{ $s->jurusan }}</td>
+                                                    <td>{{ getKelasNameByKelasId($s->kelas_id) }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

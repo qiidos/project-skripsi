@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 top-margin-2">
+        <!-- <div class="col-md-4 top-margin-2">
             <div class="card">
                 <div class="card-header bg-navbar align-middle rounded-0">
                     <div class="text-light"><strong>UPDATE KELAS SISWA</strong></div>
@@ -102,13 +102,13 @@
                         <form action="/import_siswa/proses_import" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group col-md-12 justify-content-center">
-                                <a class="btn btn-primary text-light" href="/tambah_akun_siswa"><i class="fas fa-lock" style="margin-right: 10px;"></i>Update Kelas Siswa</a>
+                                <a class="btn btn-primary text-light" href="/update_kelas"><i class="fas fa-lock" style="margin-right: 10px;"></i>Update Kelas Siswa</a>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 @endsection

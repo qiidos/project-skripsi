@@ -15,10 +15,9 @@ class SiswaImport implements ToModel, WithHeadingRow, WithValidation, WithCustom
     public function model(array $row)
     {
         return new Siswa([
+            'kelas_id' => $row['kelas_id'],
             'nis' => $row['nis'],
-            'nama' => $row['nama'],
-            'jurusan' => $row['jurusan'],
-            'kelas' => $row['kelas']
+            'nama' => $row['nama']
         ]);
     }
 
@@ -27,8 +26,7 @@ class SiswaImport implements ToModel, WithHeadingRow, WithValidation, WithCustom
         return [
             'nis' => 'required|numeric',
             'nama' => 'required|string|regex:/^[a-zA-Z_,.\s]+$/',
-            'jurusan' => 'required|numeric',
-            'kelas' => 'required|numeric'
+            'kelas_id' => 'required|numeric'
         ];
     }
 

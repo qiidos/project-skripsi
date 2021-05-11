@@ -75,7 +75,7 @@
                                                         <tr>
                                                             <td><strong>Kelas</strong></td>
                                                             <td><strong>:</strong></td>
-                                                            <td>{{ $siswa->kelas }} {{ $siswa->jurusan }}</td>
+                                                            <td>{{ getKelasNameByKelasId($siswa->kelas_id) }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th colspan="3">

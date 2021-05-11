@@ -16,8 +16,8 @@ $(document).ready(function() {
     });
     
     data_fillable();
-
-    function data_fillable(jurusan = '', kelas = '') {
+    
+    function data_fillable(kelas = '') {
         var table = $('#datatabel').DataTable({
             ordering: false,
             scrollX: true,
@@ -46,7 +46,6 @@ $(document).ready(function() {
             ajax: {
                 url: path_home,
                 data: {
-                    jurusan: jurusan,
                     kelas: kelas
                 }
             },
@@ -65,10 +64,6 @@ $(document).ready(function() {
                 {
                     data: 'kelas',
                     name: 'kelas'
-                },
-                {
-                    data: 'jurusan',
-                    name: 'jurusan'
                 },
                 {
                     data: 'total_poin',
@@ -91,21 +86,41 @@ $(document).ready(function() {
     };
 
     $('.filter-select').change(function() {
-        var jurusan = $('#jurusan').val();
         var kelas = $('#kelas').val();
-
-        if (jurusan != '' && kelas != '') {
-            $('#datatabel').DataTable().destroy();
-            data_fillable(jurusan, kelas);
-        } else if (jurusan != '') {
-            $('#datatabel').DataTable().destroy();
-            data_fillable(jurusan);
-        } else if (kelas != '') {
+        if (kelas != '') {
             $('#datatabel').DataTable().destroy();
             data_fillable(kelas);
         }
-
     });
+    
+    $('#tingkat').change(function(){
+        if($('#tingkat').val() != 0){
+            $("#kelas").prop('disabled', false);
+            getKelas();
+        }
+        else if ($('#tingkat').val() == 0){
+            $("#kelas").prop('disabled', true);
+            $('#kelas').html('<option value="0">Pilih tingkat terlebih dahulu</option>');
+            $('#datatabel').DataTable().destroy();
+            data_fillable();
+        };
+    });
+
+    function getKelas(){
+        var tingkat = $('#tingkat').val();
+        $.ajax({
+            type: "GET",
+            url: '/data_kelas/' + tingkat
+        }).done(function(val){
+            var option = [];
+            $.each(val, function( key, value ) {
+                option[key] = '<option value="'+ value['id'] +'">'+ value['tingkat'] + ' ' + value['kelas'] +'</option>';
+            });
+            $('#datatabel').DataTable().destroy();
+            data_fillable(val[0]['id']);
+            $('#kelas').html(option);
+        });
+    };
 
     $.fn.datepicker.dates['id'] = {
         days: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
@@ -266,8 +281,89 @@ $(document).ready(function() {
         if (kategori != '') {
             $('#tabeldetail').DataTable().destroy();
             data_detail(kategori);
-        }
+        };
     });
+
+    data_kelas();
+    
+    function data_kelas() {
+        var table = $('#tabelkelas').DataTable({
+            ordering: false,
+            scrollX: true,
+            processing: true,
+            serverSide: false,
+            pagingType: "full",
+            pageLength: 10,
+            lengthMenu: [10, 15, 20],
+            language: {
+                "lengthMenu": "Menampilkan _MENU_ data siswa.",
+                "zeroRecords": "Tidak terdapat data siswa.",
+                "infoEmpty": "Tidak ada data.",
+                "loadingRecords": "Mohon tunggu...",
+                "processing": "Mohon tunggu...",
+                "paginate": {
+                    "previous": "<",
+                    "next": ">",
+                    "last": "Terakhir",
+                    "first": "Pertama"
+                },
+                "info": "Menampilkan _START_ hingga _END_ siswa dari total _TOTAL_ siswa.",
+                "search": '<i class="fa fa-search" aria-hidden="true"></i>',
+                "searchPlaceholder": 'Cari Siswa...',
+                "infoFiltered": "(Menampilkan hasil dari _MAX_ total siswa)."
+            },
+            ajax: {
+                url: path_kelas
+            },
+            columns: [
+                {
+                    data: "",
+                    defaultContent: "",
+                    searchable: false,
+                    orderable: false,
+                    targets: 0
+                },
+                {
+                    data: 'jurusan',
+                    name: 'jurusan',
+                    className: "text-left"
+                },
+                {
+                    data: 'angkatan',
+                    name: 'angkatan'
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    // className: "bolded"
+                },
+                {
+                    data: 'id',
+                    name: 'opsi',
+                    render: function (id) {
+                        return '<button type="button" class="btn btn-primary text-light updatekelas" id="'+ id +'" value="'+ id +'" data-toggle="modal" data-target="#myModal_updatekelas"><i class="fas fa-arrow-up" style="color: white;"></i>  Naikkan</a>'
+                    },
+                    orderable: true,
+                    searchable: true
+                }
+            ]
+        });
+
+        table.on( 'draw.dt order.dt search.dt', function () {
+            table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
+    };
+
+    $(document).on('click', 'button.updatekelas', function(){
+        $('a.submit_updatekelas').val($(this).val());
+    });
+
+    $(document).on('click', 'a.submit_updatekelas',function(){
+        var val = $('a.submit_updatekelas').val();
+        $("a#submit_updatekelas").attr("href", "/update_kelas/proses_update/"+val);
+     });
 
     $(".pw-baru").on('click',function() {
         var $pwd = $("#password_baru");

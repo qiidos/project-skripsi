@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Siswa;
+use App\Kelas;
 use Faker\Factory as Faker;
 
 class SiswaSeeder extends Seeder
@@ -14,19 +15,17 @@ class SiswaSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
+        $kelas = Kelas::select('id')->get();
 
-        for ($i = 1; $i <= 10; $i++) {
-            Siswa::insert([
-                'nis' => $faker->numerify('#########'),
-                'nama' => $faker->name,
-                'jenis_kelamin' => 'Laki-Laki',
-                'jurusan' => 'Pemasaran 3',
-                'kelas' => $faker->numberBetween(10, 12),
-                'total_poin' => 0,
-                'predikat' => 'Amat Baik',
-                'nilai' => 'A',
-                'deskripsi' => null
-            ]);
+        for ($j = 0; $j < count($kelas); $j++) {
+            for ($i = 1; $i <= 7; $i++) {
+                Siswa::insert([
+                    'kelas_id' => $kelas[$j]['id'],
+                    'nilai_id' => 1,
+                    'nis' => $faker->numerify('#########'),
+                    'nama' => $faker->name
+                ]);
+            }
         }
     }
 }

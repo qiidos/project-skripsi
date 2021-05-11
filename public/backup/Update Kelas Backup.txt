@@ -1,0 +1,51 @@
+// public function update_kelas(Request $request)
+    // {
+    //     if ($request->session()->has('session')) {
+    //         if ($request->ajax()) {
+    //             $data = KelasGrup::select('id', 'tingkat', 'jurusan', 'angkatan', 'islulus')->orderBy('islulus', 'asc')->get();
+    //             return DataTables::of($data)
+    //                 ->addIndexColumn()
+    //                 ->editColumn('jurusan', function ($data) {
+    //                     return "$data->tingkat - $data->jurusan";
+    //                 })
+    //                 ->editColumn('status', function ($data) {
+    //                     $status = "";
+    //                     if ($data->islulus == 1) {
+    //                         $status = "Lulus";
+    //                     } else {
+    //                         $status = "Aktif";
+    //                     }
+    //                     return $status;
+    //                 })
+    //                 ->rawColumns(['opsi'])
+    //                 ->make(true);
+    //         }
+    //         return view('/content/update_kelas');
+    //     } else {
+    //         return redirect('/masuk');
+    //     }
+    // }
+
+    // public function prosesUpdateKelas(Request $request, $id)
+    // {
+    //     $kelas_grup = KelasGrup::find($id);
+    //     if ($kelas_grup->tingkat == 12) {
+    //         $kelas_grup->islulus = 1;
+    //         $kelas_grup->save();
+    //     } else {
+    //         $kelas_grup->tingkat = $kelas_grup->tingkat + 1;
+    //         $kelas_grup->save();
+    //     }
+    //     return redirect('/update_kelas');
+    // }
+
+     // $data = Siswa::join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+                    //     ->join('kelas_grups', 'kelas.kelas_grup_id', '=', 'kelas_grups.id')
+                    //     ->where('kelas_grups.islulus', 0)
+                    //     ->orderBy('kelas_grups.tingkat', 'asc')
+                    //     ->get();
+
+    // ->where([
+        //     ['kelas_grups.tingkat', $tingkat],
+        //     ['kelas_grups.islulus', 0]
+        // ])

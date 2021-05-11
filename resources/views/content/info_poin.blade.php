@@ -37,7 +37,7 @@
                                             <tr>
                                                 <td><strong>Kelas</strong></td>
                                                 <td><strong>:</strong></td>
-                                                <td>{{ $siswa->kelas->kelas }} {{ $siswa->jurusan->jurusan }}</td>
+                                                <td>{{ getKelasNameByKelasId($siswa->kelas_id) }}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Predikat Tingkah Laku</strong></td>
@@ -69,9 +69,9 @@
                                 <label for="kategori"><strong>Kategori</strong></label>
                                 <select id="kategori" name="kategori" class="form-control">
                                     <option value="0" selected>Pilih Kategori</option>
-                                    <option value="Ringan">Ringan</option>
-                                    <option value="Sedang">Sedang</option>
-                                    <option value="Berat">Berat</option>
+                                    @foreach($kategori as $k)
+                                    <option value="{{ $k->id }}">{{ $k->kategori }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

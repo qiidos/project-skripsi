@@ -18,21 +18,18 @@
                 <div class="card-header">
                     <div class="form-row justify-content-center mt-md-3">
                         <div class="form-group col-md-4">
-                            <label for="kelas"><strong>Kelas</strong></label>
-                            <select id="kelas" name="kelas" class="form-control filter-select">
-                                <option value="0">Pilih Kelas</option>
-                                @foreach($kelas as $k)
-                                <option value="{{ $k->id }}">{{ $k->kelas }}</option>
-                                @endforeach
+                            <label for="tingkat"><strong>Tingkat</strong></label>
+                            <select id="tingkat" name="tingkat" class="form-control">
+                                <option value="0">Pilih Tingkat</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="jurusan"><strong>Jurusan</strong></label>
-                            <select id="jurusan" name="jurusan" class="form-control filter-select">
-                                <option value="0">Pilih Jurusan</option>
-                                @foreach($jurusan as $j)
-                                <option value="{{ $j->id }}">{{ $j->jurusan }}</option>
-                                @endforeach
+                            <label for="kelas"><strong>Kelas</strong></label>
+                            <select id="kelas" name="kelas" class="form-control filter-select" disabled>
+                                <option value="0">Pilih tingkat terlebih dahulu</option>
                             </select>
                         </div>
                     </div>
@@ -50,9 +47,8 @@
                         <table class="table table-bordered table-hover mt-md-2 thead-margin shadow" style="width:100%" id="datatabel">
                             <colgroup>
                                 <col span="1" style="width: 5%;">
-                                <col span="1" style="width: 40%;">
-                                <col span="1" style="width: 15%;">
-                                <col span="1" style="width: 20%;">
+                                <col span="1" style="width: 50%;">
+                                <col span="1" style="width: 25%;">
                                 <col span="1" style="width: 10%;">
                                 <col span="1" style="width: 10%;">
                             </colgroup>
@@ -61,7 +57,6 @@
                                     <th>No.</th>
                                     <th>Nama Siswa</th>
                                     <th>Kelas</th>
-                                    <th>Jurusan</th>
                                     <th>Poin</th>
                                     <th>OPSI</th>
                                 </tr>

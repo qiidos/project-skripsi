@@ -16,7 +16,7 @@ class Kelas extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('kelas_grup_id');
-            $table->string('jurusan');
+            $table->string('kelas');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('kelas_grup_id')->references('id')->on('kelas_grups');

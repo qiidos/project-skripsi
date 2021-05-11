@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/dompdf.css">
-    <title>Poin Pelanggaran {{ $siswa->nama }}-{{ $siswa->kelas->kelas }}-{{ $siswa->jurusan->jurusan }}</title>
+    <title>Poin Pelanggaran - {{ $siswa->nama }} - {{ getKelasNameByKelasId($siswa->kelas_id) }}</title>
     <style>
         body {
             margin: 0;
@@ -93,6 +93,11 @@
         }
 
         #main_table {
+            border-right-style: none;
+            border-left-style: none;
+            border-collapse: collapse;
+            border-top: 2px solid #000000;
+            border-bottom: 2px solid #000000;
             border-collapse: collapse;
             width: 100%;
             text-align: middle;
@@ -106,11 +111,29 @@
         }
 
         #main_table td,
-        #main_table th {
+        #main_table th,
+        #main_table tr {
+            border-right-style: none;
+            border-left-style: none;
             border: 1px solid #ddd;
             line-height: 30px;
             text-align: center;
             padding-bottom: 5px;
+        }
+
+        .main-table thead,
+        .main-table tfoot {
+            border-right-style: none;
+            border-left-style: none;
+            border-top: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+        }
+
+        .main-table tr,
+        .main-table td {
+            border-right-style: none;
+            border-left-style: none;
+            border-top: 2px solid #000000;
         }
 
         #catatan {
@@ -139,7 +162,7 @@
             </colgroup>
             <tbody class="text-center tbody-bg" style="background-color: white;">
                 <tr>
-                    <td class="float-left"><img src="{{ public_path('asset/logo-smk.png') }}" width="94px"></td>
+                    <td class="float-left"><img src="{{ public_path('asset/logo-smk-bw.png') }}" width="94px"></td>
                     <td>
                         <p style="font-size: 19px; padding-top: 8px;"><strong>PEMERINTAH KOTA PASURUAN</strong></p></br>
                         <p style="font-size: 19px;"><strong>DINAS PENDIDIKAN</strong></p></br>
@@ -147,7 +170,7 @@
                         <p style="font-size: 13px;">Jalan Veteran, Kota Pasuruan Telp. (0341) 421380</p></br>
                         <p style="font-size: 13px;">Website: http://www.smkn1-pasuruan.sch.id</p>
                     </td>
-                    <td class="float-right"><img src="{{ public_path('asset/logo-pasuruan.png') }}" width="94px"></td>
+                    <td class="float-right"><img src="{{ public_path('asset/logo-pasuruan-bw.png') }}" width="94px"></td>
                 </tr>
             </tbody>
         </table>
@@ -179,7 +202,7 @@
                 <tr>
                     <td><strong>Kelas</strong></td>
                     <td><strong>:</strong></td>
-                    <td>{{ $siswa->kelas->kelas }} {{ $siswa->jurusan->jurusan }}</td>
+                    <td>{{ getKelasNameByKelasId($siswa->kelas_id) }}</td>
                 </tr>
                 <tr>
                     <td><strong>Predikat Tingkah Laku</strong></td>
@@ -188,9 +211,9 @@
                 </tr>
             </tbody>
         </table>
-        <table id="main_table">
-            <thead class="thead-bg">
-                <tr>
+        <table id="main_table" class="main-table">
+            <thead>
+                <tr style="border-right-style: none;">
                     <th>No.</th>
                     <th>Tanggal</th>
                     <th>Pelanggaran</th>
@@ -223,7 +246,7 @@
                 @endforeach
             </tbody>
             @endif
-            <tfoot class="tbody-bg">
+            <tfoot>
                 <tr>
                     <td colspan="4"><strong>TOTAL POIN</strong></td>
                     <td>

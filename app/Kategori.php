@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    protected $table = "kategori";
+    protected $table = "kategories";
 
     public function poin()
     {
-        return $this->belongsTo('App\Poin');
+        return $this->hasMany('App\Poin');
     }
 }

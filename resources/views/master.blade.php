@@ -63,6 +63,7 @@
     <script type="text/javascript">
         var path_home = "{{ route('siswa.home') }}";
         var path_detail = "{{ route('poin.siswa') }}";
+        var path_kelas = "{{ route('kelasgrup.kelas') }}";
     </script>
 </body>
 

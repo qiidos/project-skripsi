@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengguna extends Model
 {
-    protected $table = 'pengguna';
+    protected $table = 'penggunas';
 
-    protected $fillable = ['username', 'nama', 'password', 'email', 'token'];
+    protected $fillable = ['username', 'status_id', 'nama', 'password', 'email', 'token'];
 
     public function status()
     {
-        return $this->hasOne('App\Status', 'id', 'status_id');
+        return $this->belongsTo('App\Status', 'status_id', 'id');
     }
 
     public function siswa()
     {
-        return $this->hasOne('App\Siswa', 'nis', 'username');
+        return $this->hasMany('App\Siswa', 'nis', 'username');
     }
 }

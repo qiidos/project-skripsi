@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
 {
-    protected $table = 'siswa';
+    protected $table = 'siswas';
 
-    protected $fillable = ['nilai_id', 'nis', 'nama', 'jenis_kelamin', 'jurusan', 'kelas'];
+    protected $fillable = ['nilai_id', 'kelas_id', 'nis', 'nama'];
 
     public function poin()
     {
-        return $this->hasMany('App\Poin', 'siswa_id', 'id');
+        return $this->hasMany('App\Poin');
     }
 
     public function nilai()
     {
-        return $this->hasOne('App\Nilai', 'id', 'nilai_id');
+        return $this->belongsTo('App\Nilai', 'nilai_id', 'id');
     }
 
     public function pengguna()
     {
-        return $this->belongsTo('App\Pengguna');
+        return $this->belongsTo('App\Pengguna', 'username', 'nis');
     }
 
     public function motivasi()
     {
-        return $this->hasOne('App\Motivasi', 'siswa_id', 'id');
+        return $this->hasOne('App\Motivasi');
     }
 
     public function kelas()

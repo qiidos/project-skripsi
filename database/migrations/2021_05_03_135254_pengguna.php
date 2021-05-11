@@ -20,7 +20,7 @@ class Pengguna extends Migration
             $table->string('nama');
             $table->text('password');
             $table->string('email')->unique();
-            $table->text('token');
+            $table->text('token')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('status_id')->references('id')->on('status');

@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nilai extends Model
 {
-    protected $table = 'nilai';
+    protected $table = 'nilaies';
 
     public function siswa()
     {
-        return $this->belongsTo('App\Siswa');
+        return $this->hasMany('App\Siswa');
     }
 }
