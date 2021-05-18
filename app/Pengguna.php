@@ -15,8 +15,8 @@ class Pengguna extends Model
         return $this->belongsTo('App\Status', 'status_id', 'id');
     }
 
-    public function siswa()
-    {
-        return $this->hasMany('App\Siswa', 'nis', 'username');
-    }
+    // public function siswa()
+    // {
+    //     return $this->belongsTo('App\Siswa', 'nis', 'username');
+    // }
 }

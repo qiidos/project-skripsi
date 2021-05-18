@@ -54,10 +54,10 @@
                             </colgroup>
                             <thead class="text-center thead-bg">
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Kelas</th>
-                                    <th>Poin</th>
+                                    <th>NO.</th>
+                                    <th>NAMA SISWA</th>
+                                    <th>KELAS</th>
+                                    <th>POIN</th>
                                     <th>OPSI</th>
                                 </tr>
                             </thead>

@@ -1,22 +1,45 @@
-ID			Kelas
-1 	'10 - Teknik Komputer Jaringan 1' 
-2 	'10 - Teknik Komputer Jaringan 2'
-3 	'10 - Teknik Komputer Jaringan 3'
-4 	'11 - Teknik Komputer Jaringan 1'
-5 	'11 - Teknik Komputer Jaringan 2'
-6 	'11 - Teknik Komputer Jaringan 3'
-19 	'10 - Multimedia 1'
-20 	'10 - Multimedia 2'
-21 	'10 - Multimedia 3'
-22 	'11 - Multimedia 1'
-23 	'11 - Multimedia 2'
-24 	'11 - Multimedia 3'
-37 	'10 - Akuntansi 1'
-38 	'10 - Akuntansi 2'
-39 	'10 - Akuntansi 3'
-40 	'11 - Akuntansi 1'
-41 	'11 - Akuntansi 2'
-42 	'11 - Akuntansi 3'
-43 	'12 - Akuntansi 1'
-44 	'12 - Akuntansi 2'
-45 	'12 - Akuntansi 3'
+1 = 10 Teknik Komputer Jaringan 1
+2 = 10 Teknik Komputer Jaringan 2
+3 = 10 Teknik Komputer Jaringan 3
+4 = 11 Teknik Komputer Jaringan 1
+5 = 11 Teknik Komputer Jaringan 2
+6 = 11 Teknik Komputer Jaringan 3
+7 = 12 Teknik Komputer Jaringan 1
+8 = 12 Teknik Komputer Jaringan 2
+9 = 12 Teknik Komputer Jaringan 3
+10 = 10 Pemasaran 1
+11 = 10 Pemasaran 2
+12 = 10 Pemasaran 3
+13 = 11 Pemasaran 1
+14 = 11 Pemasaran 2
+15 = 11 Pemasaran 3
+16 = 12 Pemasaran 1
+17 = 12 Pemasaran 2
+18 = 12 Pemasaran 3
+19 = 10 Multimedia 1
+20 = 10 Multimedia 2
+21 = 10 Multimedia 3
+22 = 11 Multimedia 1
+23 = 11 Multimedia 2
+24 = 11 Multimedia 3
+25 = 12 Multimedia 1
+26 = 12 Multimedia 2
+27 = 12 Multimedia 3
+28 = 10 Kimia Industri 1
+29 = 10 Kimia Industri 2
+30 = 10 Kimia Industri 3
+31 = 11 Kimia Industri 1
+32 = 11 Kimia Industri 2
+33 = 11 Kimia Industri 3
+34 = 12 Kimia Industri 1
+35 = 12 Kimia Industri 2
+36 = 12 Kimia Industri 3
+37 = 10 Akuntansi 1
+38 = 10 Akuntansi 2
+39 = 10 Akuntansi 3
+40 = 11 Akuntansi 1
+41 = 11 Akuntansi 2
+42 = 11 Akuntansi 3
+43 = 12 Akuntansi 1
+44 = 12 Akuntansi 2
+45 = 12 Akuntansi 3

@@ -48,7 +48,7 @@
                                             <td class="px-3">
                                                 <table class="table table-borderless">
                                                     <colgroup>
-                                                        <col span=" 1" style="width: 45%;">
+                                                        <col span="1" style="width: 45%;">
                                                         <col span="1" style="width: 5%;">
                                                         <col span="1" style="width: 50%;">
                                                     </colgroup>
@@ -63,7 +63,7 @@
                                                             </th>
                                                         </tr>
                                                         <tr>
-                                                            <td><strong>NIS (Nomor Induk Siswa)</strong></td>
+                                                            <td><strong>NIS</strong></td>
                                                             <td><strong>:</strong></td>
                                                             <td>{{ $siswa->nis }}</td>
                                                         </tr>

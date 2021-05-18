@@ -44,7 +44,7 @@
                                                 <a href="{{url('/csv/siswa_siswa.csv')}}" download="Template Import Data Siswa SiTalang.csv" class="btn btn-success text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Template Format CSV</a>
                                             </div>
                                             <div>
-                                                <a href="{{url('/csv/kelas.txt')}}" download="Keterangan Kelas ID" id="mit" class="btn thead-bg text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Keterangan Kelas ID</a>
+                                                <a href="/siswa/keterangan" id="mit" class="btn thead-bg text-light button-block" type="button"><i class="fas fa-file-download" style="margin-right: 10px;"></i>Download Keterangan Kelas ID</a>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <input type="file" name="data_siswa"></input>
+                                                                <input type="file" name="data_siswa" required></input>
                                                                 <small class="form-text text-muted"><strong>CATATAN: </strong>Dengan menekan tombol import berarti anda sudah yakin untuk memasukkan data siswa! (Anda tidak dapat membatalkan tindakan ini).</small>
                                                             </div>
                                                             <div class="modal-footer">
@@ -141,7 +141,7 @@
                                     <strong>{{ $message }}</strong>
                                 </div>
                                 <div class="form-row justify-content-center mx-1">
-                                    <p>Terdapat kesalahan tipe data pada {{ $error }}</p>
+                                    <p>Terdapat kesalahan penulisan data pada {{ $error }}</p>
                                 </div>
                                 @endif
                             </form>

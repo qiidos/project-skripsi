@@ -120,7 +120,7 @@ class SiswaController extends Controller
         }
     }
 
-    public function motivasi(Request $request, $id)
+    public function prosesTambahMotivasi(Request $request, $id)
     {
         $siswa = Siswa::where('id', $id)->first();
         $motivasi = $siswa->motivasi()->first();
@@ -167,6 +167,8 @@ class SiswaController extends Controller
     public function prosesImportSiswa(Request $request)
     {
         try {
+            $request->session()->forget('siswa_dup');
+            $request->session()->forget('tipe_salah');
             $catchSiswa = (Excel::toArray(new SiswaImport, $request->file('data_siswa')));
             $nis = [];
             $collapse = \Illuminate\Support\Arr::collapse($catchSiswa);
@@ -194,12 +196,24 @@ class SiswaController extends Controller
                     $fail[] = '[baris:' . $row . ', kolom:' . $col . ']';
                 };
                 $error = join(", ", $fail);
-                $request->session()->flash('tipe_salah', 'Terdapat tipe data yang salah!');
+                $request->session()->flash('tipe_salah', 'Terdapat data yang salah!');
                 return view('/content/import_data_siswa', compact('error'));
             }
         } catch (\Throwable $th) {
-            $request->session()->flash('format_gagal', 'File harus diisi dan gunakan format yang telah disediakan!');
+            $request->session()->flash('format_gagal', 'Gagal tambah data siswa. Terdapat kesalahan pada file. Silahkan periksa kembali file yang diunggah.');
             return redirect('/import_siswa');
         }
+    }
+
+    public function put()
+    {
+        $file = public_path('/csv/kelas.txt');
+        $txt = fopen($file, "w") or die("Unable to open file!");
+        $text = getKeteranganKelas();
+        foreach ($text as $t) {
+            fwrite($txt, $t . "\r\n");
+        }
+        fclose($txt);
+        return response()->download($file, "Keterangan Kelas ID.txt");
     }
 }

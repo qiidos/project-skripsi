@@ -36,3 +36,17 @@ function getDataSiswa($id)
     $siswa = Siswa::where('id', $id)->first();
     return $siswa;
 }
+
+function getKeteranganKelas()
+{
+    $kelas = Kelas::join('kelas_grups', 'kelas.kelas_grup_id', '=', 'kelas_grups.id');
+    $kelas = $kelas->select('kelas_grups.tingkat', 'kelas.kelas', 'kelas.id')->get();
+    $kls = [];
+    $id = [];
+    $tingkat = [];
+    foreach ($kelas as $k) {
+        $kls[] = $k['id'] . " = " . $k['tingkat'] . " " . $k['kelas'];
+    }
+
+    return $kls;
+}

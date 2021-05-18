@@ -10,7 +10,19 @@
 </nav>
 <div class="container mt-sm-2 card-margin">
     <div class="row justify-content-center">
-        <div class="col-md-4 top-margin">
+        <div class="col-md-12 top-margin">
+            @if ($message = Session::get('tambah_akun_berhasil'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-5 top-margin">
             <div class="card">
                 <div class="card-header bg-navbar align-middle rounded-0">
                     <div class="text-light"><strong>TAMBAH AKUN SISWA</strong></div>
@@ -27,7 +39,7 @@
                         <table class="table table-borderless border rounded">
                             <tbody>
                                 <td>
-                                    Menu ini berfungsi untuk menambahkan akun siswa agar siswa dapat melihat poin pelanggaran yang telah didapatkan.
+                                    Menu ini berfungsi untuk menambahkan akun siswa agar siswa dapat melihat poin pelanggarannya.
                                 </td>
                             </tbody>
                         </table>
@@ -43,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 top-margin-2">
+        <div class="col-md-5 top-margin-2">
             <div class="card">
                 <div class="card-header bg-navbar align-middle rounded-0">
                     <div class="text-light"><strong>IMPORT DATA SISWA</strong></div>

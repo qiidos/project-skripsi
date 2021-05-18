@@ -40,7 +40,7 @@ Route::get('/daftar_siswa', 'SiswaController@prosesLihatDaftarSiswa')->name('sis
 Route::get('/siswa/detail/{id}', 'SiswaController@prosesDetailSiswa');
 Route::get('/info_poin/{id}', 'SiswaController@ProsesInfoPoin');
 Route::get('/siswa/detail_poin', 'SiswaController@prosesDetailPoin')->name('poin.siswa');
-Route::get('/siswa/detail/motivasi/{id}', 'SiswaController@motivasi');
+Route::get('/siswa/detail/motivasi/{id}', 'SiswaController@prosesTambahMotivasi');
 Route::get('/siswa/detail/tambah_poin/{id}', 'PoinController@tambah_poin');
 Route::post('/siswa/detail/proses_tambah/{id}', 'PoinController@prosesTambahPoin');
 Route::get('/siswa/detail/edit_poin/{id}', 'PoinController@edit_poin');
@@ -53,9 +53,12 @@ Route::get('/update_kelas', 'SiswaController@update_kelas')->name('kelasgrup.kel
 Route::get('/update_kelas/proses_update/{id}', 'SiswaController@prosesUpdateKelas');
 
 // TambahAkun
-Route::get('/tambah_akun_siswa', 'AkunController@tambah_akun');
-Route::post('/tambah_akun_siswa/proses_tambah_akun', 'AkunController@prosesTambahAkun');
-Route::post('/tambah_akun_siswa/proses_konfirmasi_akun', 'AkunController@prosesKonfirmasiAkun');
+Route::get('/tambah_akun_siswa', 'AuthController@tambah_akun');
+Route::post('/tambah_akun_siswa/proses_tambah_akun', 'AuthController@prosesTambahAkun');
+Route::post('/tambah_akun_siswa/proses_konfirmasi_akun', 'AuthController@prosesKonfirmasiAkun');
 
 // CetakPoin
 Route::get('/siswa/detail/cetak_poin/{id}', 'PoinController@prosesCetakPoin');
+
+//File TXT
+Route::get('/siswa/keterangan', 'SiswaController@put');

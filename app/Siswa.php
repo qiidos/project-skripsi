@@ -20,11 +20,6 @@ class Siswa extends Model
         return $this->belongsTo('App\Nilai', 'nilai_id', 'id');
     }
 
-    public function pengguna()
-    {
-        return $this->belongsTo('App\Pengguna', 'username', 'nis');
-    }
-
     public function motivasi()
     {
         return $this->hasOne('App\Motivasi');
@@ -35,8 +30,8 @@ class Siswa extends Model
         return $this->belongsTo('App\Kelas', 'kelas_id', 'id');
     }
 
-    public function jurusan()
-    {
-        return $this->belongsTo('App\Jurusan', 'jurusan_id', 'id');
-    }
+    // public function pengguna()
+    // {
+    //     return $this->hasOne('App\Pengguna', 'username', 'nis');
+    // }
 }
