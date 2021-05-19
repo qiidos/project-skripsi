@@ -200,7 +200,7 @@ class SiswaController extends Controller
                 return view('/content/import_data_siswa', compact('error'));
             }
         } catch (\Throwable $th) {
-            $request->session()->flash('format_gagal', 'Gagal tambah data siswa. Terdapat kesalahan pada file. Silahkan periksa kembali file yang diunggah.');
+            $request->session()->flash('format_gagal', 'Gagal tambah data siswa. Terdapat kesalahan pada file. Silahkan gunakan template yang telah disediakan.');
             return redirect('/import_siswa');
         }
     }

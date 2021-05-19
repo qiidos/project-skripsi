@@ -25,12 +25,13 @@ class PoinController extends Controller
         $messages = [
             'required' => 'Silahkan :attribute diisi terlebih dahulu!',
             'not_in' => ':attribute harus lebih dari 0',
-            'regex' => ':attribute tidak valid.'
+            'regex' => ':attribute tidak valid.',
+            'max' => ':attribute harus kurang dari 100'
         ];
 
         $this->validate($request, [
             'pelanggaran' => 'required',
-            'jumlah_poin' => 'required|regex:/^[0-9\d\.]+$/|min:0|not_in:0',
+            'jumlah_poin' => 'required|numeric|regex:/^[0-9\d\.]+$/|min:0|not_in:0|max:100',
             'tanggal' => 'required'
         ], $messages);
 
@@ -72,12 +73,13 @@ class PoinController extends Controller
         $messages = [
             'required' => 'Silahkan :attribute diisi terlebih dahulu!',
             'not_in' => ':attribute harus lebih dari 0',
-            'regex' => ':attribute tidak valid.'
+            'regex' => ':attribute tidak valid.',
+            'max' => ':attribute harus kurang dari 100'
         ];
 
         $this->validate($request, [
             'pelanggaran_edit' => 'required',
-            'jumlah_poin_edit' => 'required|regex:/^[0-9\d\.]+$/|min:0|not_in:0',
+            'jumlah_poin_edit' => 'required|numeric|regex:/^[0-9\d\.]+$/|min:0|not_in:0|max:100',
             'tanggal_edit' => 'required'
         ], $messages);
 
