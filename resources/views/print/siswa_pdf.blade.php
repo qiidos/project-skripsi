@@ -284,13 +284,13 @@
                             <tr>
                                 {{ setlocale(LC_ALL, 'id-ID') }}
                                 <td>Pasuruan, {{ strftime("%d %B %Y") }}<br>
-                                    Kepala Sekolah SMKN 1 Pasuruan<br>
+                                    Kepala Bagian Kedisiplinan SMKN 1 Pasuruan<br>
                                     <br>
                                     <br>
                                     <br>
                                     <br>
-                                    Drs. Akh Sigit Suyani, S.ST, M.T<br>
-                                    NIP. 19651216 199403 1 002
+                                    Setyo Wahyu Wicaksono., M.Pd.<br>
+                                    NIP. 19740629 200604 1 007
                                 </td>
                             </tr>
                         </tbody>

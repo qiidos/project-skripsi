@@ -309,11 +309,12 @@ class AuthController extends Controller
                 'regex' => ':attribute harus terdiri dari huruf dan diakhiri dengan angka serta tanpa spasi',
                 'same' => 'Konfirmasi password harus sesuai dengan password baru!',
                 'alpha_num' => ':attribute tidak boleh menggunakan spesial karakter (titik, @, #, dsb)',
-                'email' => 'Format pengisian :attribute harus sesuai dengan format email (@ dan .)'
+                'email' => 'Format pengisian :attribute harus sesuai dengan format email (@ dan .)',
+                'numeric' => ':attribute harus berupa angka!'
             ];
 
             $this->validate($request, [
-                'nis' => 'required',
+                'nis' => 'required|numeric',
                 'email' => 'required|email',
                 'password_baru' => 'required|required_with:konfirmasi_password|min:6|regex:/^[A-Za-z\.]+[0-9\d\.]+$/|alpha_num',
                 'konfirmasi_password' => 'required|same:password_baru'
@@ -332,8 +333,11 @@ class AuthController extends Controller
                     $request->session()->flash('email_ada', 'Email telah terdaftar.');
                     return redirect('/tambah_akun_siswa');
                 }
-            } else {
-                $request->session()->flash('nis_salah', 'NIS salah atau sudah terdaftar.');
+            } else if ($siswa == null) {
+                $request->session()->flash('nis_salah', 'NIS tidak sesuai dengan siswa manapun!.');
+                return redirect('/tambah_akun_siswa');
+            } else if ($username != null) {
+                $request->session()->flash('user_terdaftar', 'NIS telah telah memiliki akun!');
                 return redirect('/tambah_akun_siswa');
             }
         } else {

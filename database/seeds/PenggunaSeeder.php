@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Pengguna;
+use Illuminate\Support\Facades\Hash;
 
 class PenggunaSeeder extends Seeder
 {
@@ -22,8 +23,7 @@ class PenggunaSeeder extends Seeder
                 'username' => $username[$h],
                 'nama' => $nama[$h],
                 'password' => $password[$h],
-                'email' => $email[$h],
-                'token' => ''
+                'email' => $email[$h]
             ]);
         }
     }

@@ -14,7 +14,7 @@ $(document).ready(function() {
             $(this).addClass("btn-warning");
         }
     });
-    
+
     data_fillable();
     
     function data_fillable(kelas = '') {
