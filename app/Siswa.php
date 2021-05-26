@@ -8,7 +8,7 @@ class Siswa extends Model
 {
     protected $table = 'siswas';
 
-    protected $fillable = ['nilai_id', 'kelas_id', 'nis', 'nama'];
+    protected $fillable = ['nilai_id', 'kelas_id', 'pengguna_id', 'nis', 'nama'];
 
     public function poin()
     {
@@ -30,8 +30,8 @@ class Siswa extends Model
         return $this->belongsTo('App\Kelas', 'kelas_id', 'id');
     }
 
-    // public function pengguna()
-    // {
-    //     return $this->hasOne('App\Pengguna', 'username', 'nis');
-    // }
+    public function pengguna()
+    {
+        return $this->belongsTo('App\Pengguna');
+    }
 }

@@ -31,6 +31,7 @@
                         </a>
                         <div class="dropdown-menu drop-siswa" x-placement="bottom-start" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/ubah_password"><i class="fas fa-key" style="margin-right: 10px;"></i>Ubah Password</a>
+                            <hr style="margin: 7px 0px;">
                             <a class="dropdown-item" href="/keluar"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>Keluar</a>
                         </div>
                     </li>

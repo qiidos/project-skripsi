@@ -22,9 +22,9 @@ class SiswaController extends Controller
             if ($request->ajax()) {
                 if (!empty($request->kelas)) {
                     $data = Siswa::select('id', 'kelas_id', 'nis', 'nama')
-                        ->where('kelas_id', $request->kelas)->orderBy('kelas_id', 'asc')->get();
+                        ->where('kelas_id', $request->kelas)->orderBy('nama', 'asc')->get();
                 } else {
-                    $data = Siswa::orderBy('kelas_id', 'asc')->get();
+                    $data = Siswa::orderBy('kelas_id', 'asc')->orderBy('nama', 'asc')->get();
                 }
                 return DataTables::of($data)
                     ->addIndexColumn()

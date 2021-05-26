@@ -17,12 +17,14 @@ class Siswa extends Migration
             $table->increments('id');
             $table->unsignedInteger('kelas_id');
             $table->unsignedInteger('nilai_id')->default(1);
+            $table->unsignedInteger('pengguna_id')->nullable()->unique();
             $table->string('nis')->unique();
             $table->string('nama');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('kelas_id')->references('id')->on('kelas');
             $table->foreign('nilai_id')->references('id')->on('nilaies');
+            $table->foreign('pengguna_id')->references('id')->on('penggunas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

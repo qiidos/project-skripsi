@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pengguna;
+use App\Siswa;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewMessage;
 use Faker\Factory as Faker;
@@ -79,8 +80,8 @@ class AuthController extends Controller
             }
         } else if ($pengguna != null && $pengguna->status->status == "Siswa") {
             if (Hash::check($password, $pengguna->password) || $pengguna->password == $password) {
-                // $siswa = $pengguna->siswa()->first();
-                $siswa = getSiswaByNis($username);
+                $siswa = $pengguna->siswa()->first();
+                // $siswa = getSiswaByNis($username);
                 $request->session()->put('session', $pengguna->username);
                 $request->session()->put('nama', $pengguna->nama);
                 return redirect('/info_poin/' . $siswa->id);
@@ -314,7 +315,7 @@ class AuthController extends Controller
             ];
 
             $this->validate($request, [
-                'nis' => 'required|numeric',
+                'username' => 'required|numeric',
                 'email' => 'required|email',
                 'password_baru' => 'required|required_with:konfirmasi_password|min:6|regex:/^[A-Za-z\.]+[0-9\d\.]+$/|alpha_num',
                 'konfirmasi_password' => 'required|same:password_baru'
@@ -322,8 +323,8 @@ class AuthController extends Controller
 
             $mail = $request->email;
             $pw = $request->password_baru;
-            $siswa = getSiswaByNis($request->nis);
-            $username = Pengguna::where('username', $request->nis)->first();
+            $siswa = getSiswaByNis($request->username);
+            $username = Pengguna::where('username', $request->username)->first();
             $email = Pengguna::select('email')->where('email', $mail)->first();
 
             if ($siswa != null && $username == null) {
@@ -334,10 +335,10 @@ class AuthController extends Controller
                     return redirect('/tambah_akun_siswa');
                 }
             } else if ($siswa == null) {
-                $request->session()->flash('nis_salah', 'NIS tidak sesuai dengan siswa manapun!.');
+                $request->session()->flash('nis_salah', 'Siswa tidak terdapat di data siswa!');
                 return redirect('/tambah_akun_siswa');
             } else if ($username != null) {
-                $request->session()->flash('user_terdaftar', 'NIS telah telah memiliki akun!');
+                $request->session()->flash('user_terdaftar', 'Siswa sudah terdaftar!');
                 return redirect('/tambah_akun_siswa');
             }
         } else {
@@ -350,17 +351,20 @@ class AuthController extends Controller
         $pengguna = Pengguna::where('username', $request->nis)->first();
 
         if (empty($pengguna)) {
-            Pengguna::create([
+            $id = Pengguna::insertGetId([
                 'username' => $request->nis,
                 'status_id' => 2,
                 'nama' => $request->nama,
                 'password' => Hash::make($request->password),
                 'email' => $request->email
             ]);
+            Siswa::where('nis', $request->nis)->update([
+                'pengguna_id' => $id
+            ]);
             $request->session()->flash('tambah_akun_berhasil', 'Berhasil menambahkan akun siswa.');
             return redirect('/kelola_siswa');
         } else {
-            $request->session()->flash('akun_ada', 'Tambah akun gagal. Akun kemungkinan sudah terdaftar, silahkan hubungi guru!');
+            $request->session()->flash('akun_ada', 'Tambah akun gagal. Keterangan akun kemungkinan sudah terdaftar!');
             return redirect('/tambah_akun_siswa');
         }
     }

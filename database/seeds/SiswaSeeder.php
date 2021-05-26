@@ -14,6 +14,10 @@ class SiswaSeeder extends Seeder
      */
     public function run()
     {
+        $kelas_id = [10, 11, 1];
+        $nis = ['95864303', '14540010', '419392974'];
+        $nama = ['Alika Agustina', 'Kasim Cawisono Nainggolan', 'Clara Nasyiah'];
+        $pengguna_id = [3, 4, 5];
         $faker = Faker::create('id_ID');
         $kelas = Kelas::select('id')->get();
 
@@ -26,6 +30,16 @@ class SiswaSeeder extends Seeder
                     'nama' => $faker->name
                 ]);
             }
+        }
+
+        for ($o = 0; $o < count($nis); $o++) {
+            Siswa::insert([
+                'kelas_id' => $kelas_id[$o],
+                'pengguna_id' => $pengguna_id[$o],
+                'nilai_id' => 1,
+                'nis' => $nis[$o],
+                'nama' => $nama[$o]
+            ]);
         }
     }
 }

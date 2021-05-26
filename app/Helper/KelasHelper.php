@@ -4,6 +4,7 @@ use App\Kelas;
 use App\Kategori;
 use App\Siswa;
 
+
 function getKelasNameByKelasId($kelas_id)
 {
     $kelas = Kelas::find($kelas_id);

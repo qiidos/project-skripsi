@@ -93,11 +93,6 @@
         }
 
         #main_table {
-            border-right-style: none;
-            border-left-style: none;
-            border-collapse: collapse;
-            border-top: 2px solid #000000;
-            border-bottom: 2px solid #000000;
             border-collapse: collapse;
             width: 100%;
             text-align: middle;
@@ -113,9 +108,7 @@
         #main_table td,
         #main_table th,
         #main_table tr {
-            border-right-style: none;
-            border-left-style: none;
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             line-height: 30px;
             text-align: center;
             padding-bottom: 5px;
@@ -123,17 +116,8 @@
 
         .main-table thead,
         .main-table tfoot {
-            border-right-style: none;
-            border-left-style: none;
             border-top: 2px solid #000000;
             border-bottom: 2px solid #000000;
-        }
-
-        .main-table tr,
-        .main-table td {
-            border-right-style: none;
-            border-left-style: none;
-            border-top: 2px solid #000000;
         }
 
         #catatan {
@@ -213,20 +197,20 @@
         </table>
         <table id="main_table" class="main-table">
             <thead>
-                <tr style="border-right-style: none;">
-                    <th>No.</th>
-                    <th>Tanggal</th>
-                    <th>Pelanggaran</th>
-                    <th>Kategori</th>
-                    <th>Poin</th>
+                <tr>
+                    <th>NO.</th>
+                    <th>TANGGAL</th>
+                    <th>PELANGGARAN</th>
+                    <th>KATEGORI</th>
+                    <th>POIN</th>
                 </tr>
             </thead>
             @if($siswa->poin->sum('poin') == 0)
-            <thead>
+            <tfoot>
                 <tr>
-                    <td colspan="4" id="tidak_terdapat"><strong>TIDAK MEMPUNYAI POIN PELANGGARAN</strong></td>
+                    <td colspan="5">TIDAK MEMILIKI POIN PELANGGARAN</td>
                 </tr>
-            </thead>
+            </tfoot>
             @else
             <tbody>
                 @foreach($poin as $poin)

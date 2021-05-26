@@ -62,9 +62,9 @@
                                 @endif
                                 <div class="form-row justify-content-center">
                                     <div class="form-group col-md-3">
-                                        <label for="nis"><strong>NIS</strong></label>
-                                        <input type="text" class="form-control" name="nis" id="nis" placeholder="Masukkan nis siswa" value="{{ old('nis') }}">
-                                        <small><strong>Catatan!</strong> NIS siswa merupakan nis yang telah terdaftar di daftar siswa.</small>
+                                        <label for="username"><strong>Username (NIS)</strong></label>
+                                        <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username siswa" value="{{ old('username') }}">
+                                        <small><strong>Catatan!</strong> Username merupakan NIS siswa yang telah terdaftar di daftar siswa.</small>
 
                                         @if($errors->has('nis'))
                                         <div class=" text-danger">
