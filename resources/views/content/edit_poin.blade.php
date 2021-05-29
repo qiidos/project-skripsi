@@ -83,6 +83,18 @@
                         </div>
                         <div class="form-row mt-md-2 justify-content-center">
                             <div class="form-group col-md-7">
+                                <label for="edit_tindak_lanjut"><strong>Tindak Lanjut/Penyelesaian</strong></label>
+                                <textarea class="form-control shadow" name="edit_tindak_lanjut" id="edit_tindak_lanjut" style="height:100px" placeholder="Masukkan tindak lanjut dari pelanggaran yang telah dilakukan oleh siswa">{{ $poin->penanganan }}</textarea>
+
+                                @if($errors->has('edit_tindak_lanjut'))
+                                <div class=" text-danger">
+                                    {{ $errors->first('edit_tindak_lanjut')}}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-row mt-md-2 justify-content-center">
+                            <div class="form-group col-md-7">
                                 <div class="d-flexx d-flex justify-content-end pt-sm-2 pb-sm-1">
                                     <div>
                                         <a href="/siswa/detail/{{ $poin->siswa->id }}" method="post" class="btn btn-custom btn-secondary text-light button-block" id="kembali" type="button">Kembali</a>

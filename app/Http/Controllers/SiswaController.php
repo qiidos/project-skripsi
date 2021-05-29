@@ -90,12 +90,12 @@ class SiswaController extends Controller
         $siswa = Siswa::where('id', $request->id)->first();
         if ($request->ajax()) {
             if (!empty($request->kategori)) {
-                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
+                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'penanganan', 'poin', 'tanggal')
                     ->where('kategori_id', $request->kategori)
                     ->orderBy('tanggal', 'desc')
                     ->get();
             } else {
-                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
+                $data = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'penanganan', 'poin', 'tanggal')
                     ->orderBy('tanggal', 'desc')
                     ->get();
             }
@@ -107,6 +107,11 @@ class SiswaController extends Controller
                     $kategori = $data->kategori->kategori;
                     return $kategori;
                 })
+                ->editColumn('jenis_pelanggaran', function ($data) {
+                    $pelanggaran = '<div class="text-left"><span class="text">' . $data->jenis_pelanggaran . '<br></span></div><div class="text-left highlight"><small><strong>Tindak lanjut:</strong> ' . $data->penanganan . '</small></div>';
+                    return $pelanggaran;
+                })
+                ->rawColumns(['jenis_pelanggaran'])
                 ->make(true);
         }
     }

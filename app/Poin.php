@@ -8,7 +8,7 @@ class Poin extends Model
 {
     protected $table = "poins";
 
-    protected $fillable = ['siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal'];
+    protected $fillable = ['siswa_id', 'kategori_id', 'jenis_pelanggaran', 'penanganan', 'poin', 'tanggal'];
 
     public function siswa()
     {

@@ -18,6 +18,7 @@ class Poin extends Migration
             $table->unsignedInteger('siswa_id');
             $table->unsignedInteger('kategori_id');
             $table->string('jenis_pelanggaran');
+            $table->string('penanganan')->nullable();
             $table->string('poin');
             $table->date('tanggal');
             $table->timestamp('created_at')->useCurrent();

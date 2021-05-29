@@ -6,7 +6,7 @@
         <div class="col-md-8 top-margin-2">
             <div class="card">
                 <div class="card-header bg-navbar align-middle rounded-0">
-                    <div class="text-light"><strong>DATA POIN SISWA</strong></div>
+                    <div class="text-light"><strong>DATA POIN, {{ strtoupper($siswa->nama) }}</strong></div>
                 </div>
                 <div class="card-body cardbody-bg">
                     <section name="biodata_siswa">
@@ -85,9 +85,9 @@
                                 <table class="table table-bordered table-hover shadow thead-margin display nowrap" style="width: 100%;" id="infopoin">
                                     <colgroup>
                                         <col span="1" style="width: 5%;">
-                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 55%;">
-                                        <col span="1" style="width: 25%;">
+                                        <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 5%;">
                                     </colgroup>
                                     <thead class="text-center thead-bg">

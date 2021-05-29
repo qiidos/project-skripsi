@@ -203,12 +203,12 @@
                                     <colgroup>
                                         <col span="1" style="width: 5%;">
                                         <col span="1" style="width: 10%;">
-                                        <col span="1" style="width: 50%;">
-                                        <col span="1" style="width: 25%;">
+                                        <col span="1" style="width: 55%;">
+                                        <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 5%;">
                                         <col span="1" style="width: 5%;">
                                     </colgroup>
-                                    <thead class="text-center thead-bg">
+                                    <thead class="text-center thead-bg" style="width: 100% !important">
                                         <tr>
                                             <th>No.</th>
                                             <th>Tanggal</th>
@@ -218,11 +218,11 @@
                                             <th>OPSI</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="text-center">
+                                    <tbody class=" text-center">
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4" style="text-align:center">TOTAL POIN</th>
+                                            <th colspan="4" style="text-align:center; width: 100% !important;">TOTAL POIN</th>
                                             <th style="text-align:center"></th>
                                             <th></th>
                                         </tr>

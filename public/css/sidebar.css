@@ -1,5 +1,5 @@
 #sidebar.active {
-    margin-left: -320px;
+    margin-left: -285px;
 }
 
 .wrapper {
@@ -9,9 +9,10 @@
 }
 
 #sidebar {
+    border: 1px solid #47748b;
     margin-top: 66px;
-    min-width: 320px;
-    max-width: 320px;
+    min-width: 285px;
+    max-width: 285px;
     background: #303e56;
     color: rgb(255, 255, 255);
     transition: all 0.3s;
@@ -19,9 +20,9 @@
 
 #sidebar ul.components {
     padding: 10px 0;
-    border-bottom: 1px solid #47748b;
-    border-top: 1px solid #47748b;
-    width: 290px;
+    /* border-bottom: 1px solid #47748b; */
+    /* border-top: 1px solid #47748b; */
+    width: 245px;
     position: fixed;
 }
 
@@ -31,8 +32,10 @@
 }
 
 #sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
+    border-bottom: 1px solid #47748b;
+    margin-top: 10px;
+    padding: 13px 10px;
+    font-size: 0.96em;
     display: block;
 }
 
@@ -64,14 +67,14 @@ ul ul a {
 
 #content {
     width: 100%;
-    padding: 20px 5px;
+    padding: 0px 0px;
     min-height: 100vh;
     transition: all 0.3s;
 }
 
 @media (max-width: 767px) {
     #sidebar {
-        margin-left: -320px;
+        margin-left: -285px;
     }
     #sidebar.active {
         margin-left: 0;
@@ -83,13 +86,13 @@ ul ul a {
 
 @media (max-width: 1024px) {
     #sidebar {
-        margin-left: -320px;
+        margin-left: -285px;
     }
     #sidebar.active {
         margin-left: 0;
     }
     #content {
-        margin-right: -320px;
+        margin-right: -285px;
     }
     #sidebarCollapse span {
         display: none;

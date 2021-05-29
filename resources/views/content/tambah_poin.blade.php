@@ -72,12 +72,24 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-calendar-alt" id="calendar"></i></span>
                                     </div>
-                                    <input type="text" name="tanggal" placeholder="DD-MM-YYYY" class="form-control date" id="tanggal" value="{{ old('tanggal') }}">
+                                    <input type="text" name="tanggal" placeholder="DD-MM-YYYY" class="form-control date" id="date" value="{{ old('tanggal') }}">
                                 </div>
 
                                 @if($errors->has('tanggal'))
                                 <div class="text-danger">
                                     {{ $errors->first('tanggal')}}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-row mt-md-2 justify-content-center">
+                            <div class="form-group col-md-7">
+                                <label for="tindak_lanjut"><strong>Tindak Lanjut/Penyelesaian</strong></label>
+                                <textarea class="form-control shadow" name="tindak_lanjut" id="tindak_lanjut" style="height:100px" placeholder="Masukkan tindak lanjut dari pelanggaran yang telah dilakukan oleh siswa"></textarea>
+
+                                @if($errors->has('tindak_lanjut'))
+                                <div class=" text-danger">
+                                    {{ $errors->first('tindak_lanjut')}}
                                 </div>
                                 @endif
                             </div>

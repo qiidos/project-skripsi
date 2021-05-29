@@ -32,7 +32,8 @@ class PoinController extends Controller
         $this->validate($request, [
             'pelanggaran' => 'required',
             'jumlah_poin' => 'required|numeric|regex:/^[0-9\d\.]+$/|min:0|not_in:0|max:100',
-            'tanggal' => 'required'
+            'tanggal' => 'required',
+            'tindak_lanjut' => 'required'
         ], $messages);
 
         if ($request->kategori == null) {
@@ -48,6 +49,7 @@ class PoinController extends Controller
             'siswa_id' => $id,
             'kategori_id' => $request->kategori,
             'jenis_pelanggaran' => $request->pelanggaran,
+            'penanganan' => $request->tindak_lanjut,
             'poin' => $request->jumlah_poin,
             'tanggal' => Carbon::parse($request->tanggal)
         ]);
@@ -80,7 +82,8 @@ class PoinController extends Controller
         $this->validate($request, [
             'pelanggaran_edit' => 'required',
             'jumlah_poin_edit' => 'required|numeric|regex:/^[0-9\d\.]+$/|min:0|not_in:0|max:100',
-            'tanggal_edit' => 'required'
+            'tanggal_edit' => 'required',
+            'edit_tindak_lanjut' => 'required'
         ], $messages);
 
         if ($request->kategori_edit == null) {
@@ -94,13 +97,14 @@ class PoinController extends Controller
 
         $poin = Poin::find($id);
 
-        if ($poin->jenis_pelanggaran == $request->pelanggaran_edit && $poin->kategori_id == $request->kategori_edit && $poin->poin == $request->jumlah_poin_edit && Carbon::parse($poin->tanggal)->format('d-m-Y') == Carbon::parse($request->tanggal_edit)->format('d-m-Y')) {
+        if ($poin->jenis_pelanggaran == $request->pelanggaran_edit && $poin->kategori_id == $request->kategori_edit && $poin->poin == $request->jumlah_poin_edit && Carbon::parse($poin->tanggal)->format('d-m-Y') == Carbon::parse($request->tanggal_edit)->format('d-m-Y') && $poin->penanganan == $request->edit_tindak_lanjut) {
             $request->session()->flash('edit_poin_tetap', 'Tidak ada data yang diubah!');
         } else {
             $request->session()->flash('edit_poin', 'Berhasil mempertbarui data poin pelanggaran!');
         }
 
         $poin->jenis_pelanggaran = $request->pelanggaran_edit;
+        $poin->penanganan = $request->edit_tindak_lanjut;
         $poin->kategori_id = $request->kategori_edit;
         $poin->poin = $request->jumlah_poin_edit;
         $poin->tanggal = Carbon::parse($request->tanggal_edit);
@@ -124,9 +128,7 @@ class PoinController extends Controller
     public function prosesCetakPoin($id)
     {
         $siswa = getDataSiswa($id);
-        $poin = $siswa->poin()->select('id', 'siswa_id', 'kategori_id', 'jenis_pelanggaran', 'poin', 'tanggal')
-            ->orderBy('tanggal', 'desc')
-            ->get();
+        $poin = $siswa->poin()->orderBy('tanggal', 'desc')->get();
         $pdf = PDF::loadview('/print/siswa_pdf', compact('siswa', 'poin'))->setPaper('a4', 'potrait');
         return $pdf->stream("Poin Pelanggaran - " . $siswa->nama . " - " . getKelasNameByKelasId($siswa->kelas_id) . ".pdf");
     }

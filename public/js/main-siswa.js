@@ -1,11 +1,14 @@
 $(document).ready(function() {
+    $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+    });
 
     data_detail_siswa();
 
     function data_detail_siswa(kategori = '') {
         var table = $('#infopoin').DataTable({
             ordering: false,
-            scrollX: true,
+            scrollX: false,
             processing: true,
             searching: false,
             info: false,

@@ -109,8 +109,9 @@
         #main_table th,
         #main_table tr {
             /* border: 1px solid #ddd; */
-            line-height: 30px;
+            line-height: 25px;
             text-align: center;
+            border-bottom: 1px solid #000000;
             padding-bottom: 5px;
         }
 
@@ -132,6 +133,16 @@
             text-align: justify;
             text-justify: inter-word;
             border: 0px solid #ddd;
+        }
+
+        .highlight {
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            padding-top: 0px;
+            padding: 5px;
+
         }
     </style>
 </head>
@@ -219,8 +230,10 @@
                     <td>
                         {{ date('d-m-Y', strtotime($poin -> tanggal)) }}
                     </td>
-                    <td>
-                        {{ $poin -> jenis_pelanggaran }}
+                    <td style="text-align: left;">
+                        <!-- {{ $poin -> jenis_pelanggaran }} -->
+                        <span class="text" style="font-size: 14px;">{{ $poin->jenis_pelanggaran }}<br></span>
+                        <small><strong>Tindak lanjut: </strong>{{ $poin -> penanganan }}</small>
                     </td>
                     <td>{{ $poin -> kategori -> kategori }}</td>
                     <td>

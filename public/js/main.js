@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+    });
+
     $("#edit").click(function() {
         if ($("#textarea").prop('disabled') == true && $("#simpan").prop('disabled') == true) {
             $("#textarea").prop('disabled', false);
@@ -122,36 +126,23 @@ $(document).ready(function() {
         });
     };
 
-    $.fn.datepicker.dates['id'] = {
-        days: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
-        daysShort: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
-        daysMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
-        months: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-        monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-        today: 'Hari Ini',
-        clear: 'Clear',
-        format: 'yyyy-mm-dd',
-        titleFormat: 'MM yyyy', /* Leverages same syntax as ‘format’ */
-        weekStart: 0
-    };
-
-    $('.date').datepicker({
+    $('#date').datepicker({
         autoclose: true,
         todayHighlight: true,
         locale: 'id',
-        format: 'dd-mm-yyyy',
-        endDate: '0d',
+        dateFormat: 'dd-mm-yy',
+        maxDate: '0',
         language: 'id'
     });
 
-    $('.date').datepicker("setDate", "today");
+    $('#date').datepicker("setDate", "today");
 
     $('.date_edit').datepicker({
         autoclose: true,
         todayHighlight: true,
         locale: 'id',
-        format: 'dd-mm-yyyy',
-        endDate: '0d',
+        dateFormat: 'dd-mm-yy',
+        maxDate: '0',
         language: 'id'
     });
 
@@ -162,7 +153,7 @@ $(document).ready(function() {
     function data_detail(kategori = '') {
         var table = $('#tabeldetail').DataTable({
             ordering: false,
-            scrollX: true,
+            scrollX: false,
             processing: true,
             searching: false,
             info: false,
@@ -188,8 +179,8 @@ $(document).ready(function() {
                 "infoFiltered": "(Menampilkan hasil dari _MAX_ total poin)."
             },
             fixedHeader: {
-                footer: true,
-                header: false
+                footer: false,
+                header: true
             },
             ajax: {
                 url: path_detail,
