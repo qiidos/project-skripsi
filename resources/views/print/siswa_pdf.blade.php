@@ -281,7 +281,7 @@
                             <tr>
                                 {{ setlocale(LC_ALL, 'id-ID') }}
                                 <td>Pasuruan, {{ strftime("%d %B %Y") }}<br>
-                                    Kepala Bagian Kedisiplinan SMKN 1 Pasuruan<br>
+                                    Wakil Kepala Kesiswaan SMKN 1 Pasuruan<br>
                                     <br>
                                     <br>
                                     <br>
