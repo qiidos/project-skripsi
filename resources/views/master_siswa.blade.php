@@ -27,9 +27,9 @@
             <div class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle drop-title" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hallo, {{ @Session::get('nama') }}
+                        Hallo, {{ strtok(@Session::get('nama'), " ") }}
                     </a>
-                    <div class="dropdown-menu drop-siswa" x-placement="bottom-start" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" style="position: absolute; transform: translate3d(-90px, 37px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/ubah_password"><i class="fas fa-key" style="margin-right: 10px;"></i>Ubah Password</a>
                         <hr style="margin: 7px 0px;">
                         <a class="dropdown-item" href="/keluar"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>Keluar</a>
